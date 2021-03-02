@@ -1,7 +1,12 @@
 import Background from './background';
 import Dude from './dude';
 
-const KEYS = [];
+const KEYS = {
+    UP: false,
+    DOWN: false,
+    RIGHT: false,
+    LEFT: false
+};
 
 export default class GoodTimes {
     constructor(canvas) {
@@ -32,31 +37,31 @@ export default class GoodTimes {
 
     registerEvents() {
         this.boundDudeMoveHandler = this.move.bind(this);
-        // this.boundDudeStopHandler = this.stop.bind(this);
+        this.boundDudeStopHandler = this.stop.bind(this);
         window.addEventListener("keydown", this.boundDudeMoveHandler);
-        // this.ctx.canvas.addEventListener("keyup", this.boundDudeStopHandler);
+        window.addEventListener("keyup", this.boundDudeStopHandler);
         
     }
     
     move(e) {
         // debugger
-        // if (e.key === 'ArrowUp') KEYS['up'] = true;
-        // if (e.key === 'ArrowDown') KEYS['down'] = true;
-        // if (e.key === 'ArrowLeft') KEYS['left'] = true;
-        // if (e.key === 'ArrowRight') KEYS['right'] = true;
+        if (e.key === 'ArrowUp') KEYS.UP = true;
+        if (e.key === 'ArrowDown') KEYS.DOWN = true;
+        if (e.key === 'ArrowLeft') KEYS.LEFT = true;
+        if (e.key === 'ArrowRight') KEYS.RIGHT = true;
 
-        this.dude.moveDude(e.key);
-        console.log('yeah I gues');
+        this.dude.moveDude(KEYS);
+        console.log(e.key);
     }
 
-    // stop(e) {
-    //     if (e.key === 'ArrowUp') delete KEYS['up'];
-    //     if (e.key === 'ArrowDown') delete KEYS['down'];
-    //     if (e.key === 'ArrowLeft') delete KEYS['left'];
-    //     if (e.key === 'ArrowRight') delete KEYS['right']; 
+    stop(e) {
+        if (e.key === 'ArrowUp') KEYS.UP = false;
+        if (e.key === 'ArrowDown') KEYS.DOWN = false;
+        if (e.key === 'ArrowLeft') KEYS.LEFT = false;
+        if (e.key === 'ArrowRight') KEYS.RIGHT = false; 
 
-    //     this.dude.moveDude(KEYS);
-    // }
+        this.dude.moveDude(KEYS);
+    }
 
     // first I am going to crate an animate method
     animate() {
