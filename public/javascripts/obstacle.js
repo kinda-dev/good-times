@@ -67,7 +67,12 @@ export default class Obstacle {
 
     // // // move obstacles to the left on the orizontal axis
         this.obstacles.forEach(obst => {
-            if ( obst.obstacleStartPoint + CONSTANTS.OBSTACLE_WIDTH  < 0) obst.obstacleStartPoint = this.x;
+            if ( obst.obstacleStartPoint + CONSTANTS.OBSTACLE_WIDTH  < 0) {
+                obst.obstacleStartPoint = this.x + (Math.random() * (200 - 1) + 1);
+                obst.obstacleSpeed = Math.random() * 5 + 1;
+                obst.obstacleYposition = Math.random() * (450 - 150) + 150;
+
+            }
             obst.obstacleStartPoint -= obst.obstacleSpeed;
 
     });
