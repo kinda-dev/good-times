@@ -1,12 +1,12 @@
 import Background from './background';
 import Dude from './dude';
 
-const KEYS = {
-    UP: false,
-    DOWN: false,
-    RIGHT: false,
-    LEFT: false
-};
+const KEYS = [
+    // UP: false,
+    // DOWN: false,
+    // RIGHT: false,
+    // LEFT: false
+];
 
 export default class GoodTimes {
     constructor(canvas) {
@@ -38,35 +38,32 @@ export default class GoodTimes {
     registerEvents() {
         this.boundDudeMoveHandler = this.move.bind(this);
         this.boundDudeStopHandler = this.stop.bind(this);
-        window.addEventListener("keydown", this.boundDudeMoveHandler);
-        window.addEventListener("keyup", this.boundDudeStopHandler);
+        document.addEventListener("keydown", this.boundDudeMoveHandler);
+        document.addEventListener("keyup", this.boundDudeStopHandler);
         
     }
     
     move(e) {
         // debugger
-        if (e.key === 'ArrowUp') KEYS.UP = true;
-        if (e.key === 'ArrowDown') KEYS.DOWN = true;
-        if (e.key === 'ArrowLeft') KEYS.LEFT = true;
-        if (e.key === 'ArrowRight') KEYS.RIGHT = true;
+        // KEYS[e.key] = true;
 
-        this.dude.moveDude(KEYS);
-        console.log(e.key);
+        this.dude.moveDude(e);
+        console.log(e.type, e.keyCode);
     }
 
     stop(e) {
-        if (e.key === 'ArrowUp') KEYS.UP = false;
-        if (e.key === 'ArrowDown') KEYS.DOWN = false;
-        if (e.key === 'ArrowLeft') KEYS.LEFT = false;
-        if (e.key === 'ArrowRight') KEYS.RIGHT = false; 
 
-        this.dude.moveDude(KEYS);
+        // delete KEYS[e.key]
+        this.dude.moveDude(e);
     }
 
     // first I am going to crate an animate method
     animate() {
+        this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height)
+
         // draw the background
-        this.background.animate(this.ctx);
+        // this.background.animate(this.ctx);
+
         // draw the dude after the backround so it doesn't get covered
         this.dude.animate(this.ctx);
 
