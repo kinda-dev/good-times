@@ -1,12 +1,8 @@
 import Background from './background';
 import Dude from './dude';
+import Obstacle from './obstacle';
 
-const KEYS = [
-    // UP: false,
-    // DOWN: false,
-    // RIGHT: false,
-    // LEFT: false
-];
+const OBSTACLES = [];
 
 export default class GoodTimes {
     constructor(canvas) {
@@ -15,6 +11,9 @@ export default class GoodTimes {
 
         // triggers restart
         this.restart();
+
+        // this will be use to create periodic events
+        this.gameframe = 0;
     }
 
     play() {
@@ -28,44 +27,62 @@ export default class GoodTimes {
         this.background = new Background(this.dimensions);
         // create instance of dude after the backround so it doesn't get covered
         this.dude = new Dude(this.dimensions);
+        
+        // triggering Obstacles creation
+        // this.spawnObstacles()
+
+        this.obstacles = new Obstacle(this.dimensions);
 
         this.registerEvents();
 
-        // triggers animate
+        // triggers animate condinoals to trigger will go here
         this.animate();
     }
 
     registerEvents() {
-        this.boundDudeMoveHandler = this.move.bind(this);
-        this.boundDudeStopHandler = this.stop.bind(this);
+        this.boundDudeMoveHandler = this.moveDudeTrigger.bind(this);
+        this.boundDudeStopHandler = this.stopDudeTrigger.bind(this);
         document.addEventListener("keydown", this.boundDudeMoveHandler);
         document.addEventListener("keyup", this.boundDudeStopHandler);
         
     }
     
-    move(e) {
+    moveDudeTrigger(e) {
         // debugger
         // KEYS[e.key] = true;
 
         this.dude.moveDude(e);
-        console.log(e.type, e.keyCode);
     }
 
-    stop(e) {
+    stopDudeTrigger(e) {
 
         // delete KEYS[e.key]
         this.dude.moveDude(e);
     }
 
+
+        //  // animate obstacle
+        //  for (let i = 0; i < OBSTACLES.length; i++) {
+        //     const obstacle = OBSTACLES[i];
+        //     obstacle.animate(this.ctx);
+        // }
+
     // first I am going to crate an animate method
     animate() {
         this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height)
 
-        // draw the background
+        // below line increases the counter that I will use to trigger periodic events
+        this.gameframe ++;
+
+        // draw the background this is to comment in
         // this.background.animate(this.ctx);
 
         // draw the dude after the backround so it doesn't get covered
         this.dude.animate(this.ctx);
+        
+        this.obstacles.animate(this.ctx);
+   
+        // debugger
 
         requestAnimationFrame(this.animate.bind(this));
     }

@@ -31,7 +31,7 @@ export default class Dude {
 
         this.drawDude(ctx);
         this.moveDude();
-
+        console.log(this)
         // ctx.clearRect(this.x -=1, this.y -=1, CONSTANTS.DUDE_WIDTH, CONSTANTS.DUDE_HEIGHT);
 
     }
@@ -44,7 +44,6 @@ export default class Dude {
         if ( e.type === 'keyup') {
             delete KEYS[e.keyCode];
         }
-        console.log(KEYS)
         // console.log(e.type)
 
         // debugger
