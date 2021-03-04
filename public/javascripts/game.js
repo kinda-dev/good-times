@@ -10,36 +10,26 @@ export default class GoodTimes {
         this.ctx = canvas.getContext('2d');
         this.dimensions = { width: canvas.width, height: canvas.height};
         this.loc = canvas;
-        // triggers restart
-        this.restart();
+  
+        this.registerEvents();
 
-        // this will be use to create periodic events
-        this.gameframe = 0;
 
         this.score = 0;
         this.isPitted = false;
 
-        this.isPlaying = true;
+        this.isPlaying = false;
 
-        this.gameOver = false;
-    }
-
-    playPause() {
-        // if ( this.gameOver ) this.restart();
-        if ( this.isPlaying ) {
-            this.isPlaying = false;
-        } else {
-        this.isPlaying = true;
-        this.animate();
-        }
-        console.log(this.isPlaying)
+        this.gameOver = true;
+        this.restart = false;
+        this.drawStart();
     }
 
 
 
-    restart() {
+    startGame() {
         this.gameOver = false;
         // create instance of background
+        this.isPlaying = true;
         this.background = new Background(this.dimensions);
         // create instance of dude after the backround so it doesn't get covered
         this.dude = new Dude(this.dimensions);
@@ -64,19 +54,20 @@ export default class GoodTimes {
     }
     
     handlePressedKeys(e) {
-        if ( e.key === "Enter" ) { 
-            // this.restart();
-            // this.score = 0;
-            
-            // hella hacky
-            location.reload();
+        if (( e.key === "s" ) && (!this.isPlaying) && (this.gameOver)){ 
+            console.log(this.id)
+            this.startGame();
+        }
 
+        if (( e.key === "Enter" ) && (!this.isPlaying) && (this.gameOver)){ 
+          this.restart = true;
+          console.log(this.restart)
         }
 
         if (( e.key === "p" ) || ( e.key === "P")) { this.playPause() };
 
         this.dude.moveDude(e);
-        console.log(e.key)
+        // console.log(e.key)
     }
 
     stopDudeTrigger(e) {
@@ -84,7 +75,6 @@ export default class GoodTimes {
     }
 
     collision() {
-        // debugger
         if ( this.obstacles.collidesWith(this.dude.bounds()) ) {
             this.gameOver = true;
         }
@@ -107,13 +97,18 @@ export default class GoodTimes {
     // first I am going to crate an animate method
     animate() {
         this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height)
-
         if ( this.gameOver ) {
-            delete this.id
+            
+            this.isPlaying = false;
+            if ( !this.restart ) {
+                this.drawGameOver();
+            } else {
+            this.drawStart();
+            }
+            
             // alert('what the hell');
         } else {
-        // below line increases the counter that I will use to trigger periodic events
-        // this.score += 0.04;
+
         this.handleScore();
 
         // draw the background this is to comment in
@@ -130,14 +125,11 @@ export default class GoodTimes {
         if (this.isPitted) {
             this.drawPitted();
         }
-
-        if (this.collision()) {
-            // console.log('collision')
-        }
+        this.collision()
 
         this.drawScore()
         }
-            // cancelAnimationFrame(this)
+            // cancelAnimationFrame(this.id)
         
         // debugger
             // if (this.isPlaying) {
@@ -158,16 +150,39 @@ export default class GoodTimes {
     }
 
     drawPitted() {
-        const loc = {x: this.dimensions.width / 5, y: this.dimensions.height / 6}
+        const loc = {x: this.dimensions.width / 3.5, y: this.dimensions.height / 6}
         this.ctx.font = "bold 20pt 'DotGothic16', sans-serif";
         this.ctx.fillStyle = "white";
-        this.ctx.fillText("Dude you're so pitted!! Double Points!!", loc.x, loc.y);
+        this.ctx.fillText("Gnarly!! Double Points!!", loc.x, loc.y);
         this.ctx.strokeStyle = "black";
         this.ctx.lineWidth = 1;
-        this.ctx.strokeText("Dude you're so pitted!! Double Points!!", loc.x, loc.y);
+        this.ctx.strokeText("Gnarly!! Double Points!!", loc.x, loc.y);
 
     }
 
+    drawStart() {
+        const loc = {x: this.dimensions.width / 3.5, y: this.dimensions.height / 6}
+        this.ctx.font = "bold 20pt 'DotGothic16', sans-serif";
+        this.ctx.fillStyle = "white";
+        this.ctx.fillText("Press 's' to start a new game", loc.x, loc.y);
+        this.ctx.strokeStyle = "black";
+        this.ctx.lineWidth = 1;
+        this.ctx.strokeText("Press 's' to start a new game", loc.x, loc.y);
+
+    }
+
+    drawGameOver() {
+        const loc = {x: this.dimensions.width / 3.5, y: this.dimensions.height / 6}
+        this.ctx.font = "bold 20pt 'DotGothic16', sans-serif";
+        this.ctx.fillStyle = "white";
+        this.ctx.fillText("The Game is Over press Enter to reset the game", loc.x, loc.y);
+        this.ctx.strokeStyle = "black";
+        this.ctx.lineWidth = 1;
+        this.ctx.strokeText("The Game is Over press Enter to reset the game", loc.x, loc.y);
+
+    }
+
+    
 
     
 }

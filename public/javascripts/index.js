@@ -26,3 +26,11 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('webpack is working!')
     
 })
+
+document.addEventListener("keydown", (e) => {
+    // debugger
+    const canvas = document.getElementById('good-times');
+    if ( e.key === "Enter" ) {
+        new GoodTimes(canvas);
+    }
+});
