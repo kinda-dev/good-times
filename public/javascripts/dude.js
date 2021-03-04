@@ -31,7 +31,6 @@ export default class Dude {
 
         this.drawDude(ctx);
         this.moveDude();
-        console.log(this)
         // ctx.clearRect(this.x -=1, this.y -=1, CONSTANTS.DUDE_WIDTH, CONSTANTS.DUDE_HEIGHT);
 
     }
@@ -70,6 +69,15 @@ export default class Dude {
     // line below pulls the dude toward the back of the wave
     // tested and working later
     // this.x -= CONSTANTS.WAVE_PULLBACK;
+    }
+
+    bounds() {
+        return {
+            left: this.x,
+            right: this.x + CONSTANTS.DUDE_WIDTH,
+            top: this.y,
+            bottom: this.y +CONSTANTS.DUDE_HEIGHT
+        }
     }
 
 

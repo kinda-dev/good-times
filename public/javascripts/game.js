@@ -14,6 +14,8 @@ export default class GoodTimes {
 
         // this will be use to create periodic events
         this.gameframe = 0;
+
+        this.score = 0;
     }
 
     play() {
@@ -48,24 +50,19 @@ export default class GoodTimes {
     }
     
     moveDudeTrigger(e) {
-        // debugger
-        // KEYS[e.key] = true;
-
         this.dude.moveDude(e);
     }
 
     stopDudeTrigger(e) {
-
-        // delete KEYS[e.key]
         this.dude.moveDude(e);
     }
 
-
-        //  // animate obstacle
-        //  for (let i = 0; i < OBSTACLES.length; i++) {
-        //     const obstacle = OBSTACLES[i];
-        //     obstacle.animate(this.ctx);
-        // }
+    collision() {
+        // debugger
+        return (
+            this.obstacles.collidesWith(this.dude.bounds())
+        );
+    }
 
     // first I am going to crate an animate method
     animate() {
@@ -81,6 +78,10 @@ export default class GoodTimes {
         this.dude.animate(this.ctx);
         
         this.obstacles.animate(this.ctx);
+
+        if (this.collision()) {
+            console.log('collision')
+        }
    
         // debugger
 

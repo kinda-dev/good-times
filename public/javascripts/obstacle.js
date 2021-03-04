@@ -19,7 +19,7 @@ export default class Obstacle {
       this.obstacles = [
           this.obstacle(this.x),
           this.obstacle(this.x + 100),
-          this.obstacle(this.x + 200),
+        //   this.obstacle(this.x + 200),
       ]
 
     }
@@ -33,9 +33,14 @@ export default class Obstacle {
             // obstacle position on y axis
             // randomly calculated as follows Math.random() * (max - min) + min
 
+            // aka top
             obstacleYposition: Math.random() * (450 - 150) + 150,
-
-            obstacleStartPoint: obstacleStartPoint
+            // aka left
+            obstacleStartPoint: obstacleStartPoint,
+            // aka right
+            // obstacleRight: obstacleStartPoint + CONSTANTS.OBSTACLE_WIDTH,
+            // aka bottom
+            // obstacleBottom: obstacleYposition + CONSTANTS.OBSTACLE_HEIGHT
         }
 
         return obstacleSpecs;
@@ -78,5 +83,36 @@ export default class Obstacle {
     });
     }
 
+    collidesWith(dude) {
+        // console.log(this.obstacles[0].obstacleYposition)
+        const _overlap = (obj1, obj2) => {
+            if ((obj1.obstacleStartPoint > obj2.right || 
+                obj1.obstacleStartPoint + CONSTANTS.OBSTACLE_WIDTH < obj2.left)) {
+                    return false;
+                }
+            if ((obj1.obstacleYposition > obj2.bottom || 
+                obj1.obstacleYposition + CONSTANTS.OBSTACLE_HEIGHT < obj2.top)) {
+                    return false;
+                }
+            return true
+        }
+
+
+
+
+
+
+
+        let collision = false;
+        this.obstacles.forEach(obst => {
+            //check that they don't overlap in the x axis or the y axis
+            if ( _overlap(obst, dude) ) { collision = true; } 
+            
+            // collision = true;
+        });
+        return collision;
+
+        
+    }
 
   }
