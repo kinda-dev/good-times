@@ -1,7 +1,7 @@
 const CONSTANTS = {
   // speed should be 
-  
-  BACKGROUND_SPEED: 4,
+
+  BACKGROUND_SPEED: 1,
 
 
 };
@@ -19,7 +19,9 @@ export default class Background {
   
     background() {
       const background = new Image();
-      background.src = 'https://good-times-surfing-game.s3-us-west-1.amazonaws.com/background.png';
+      // background.src = 'https://good-times-surfing-game.s3-us-west-1.amazonaws.com/background.png';
+      background.src = './assets/images/background.png';
+
       return background;
     }
     drawBackground(ctx) {

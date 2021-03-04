@@ -19,7 +19,7 @@ export default class Obstacle {
       this.obstacles = [
           this.obstacle(this.x),
           this.obstacle(this.x + 100),
-        //   this.obstacle(this.x + 200),
+          this.obstacle(this.x + 200),
       ]
 
     }
@@ -84,7 +84,6 @@ export default class Obstacle {
     }
 
     collidesWith(dude) {
-        // console.log(this.obstacles[0].obstacleYposition)
         const _overlap = (obj1, obj2) => {
             if ((obj1.obstacleStartPoint > obj2.right || 
                 obj1.obstacleStartPoint + CONSTANTS.OBSTACLE_WIDTH < obj2.left)) {

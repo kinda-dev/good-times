@@ -6,8 +6,29 @@
     <script type="text/javascript" src="./bundle.js"></script>
     <!-- <script type="text/javascript" src="keymaster.js"></script> -->
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+    <script>
+      function toggleMusic(element) {
+        if ( element.value === "musicOn") {
+        element.innerHTML = "Turn Music Off"
+        element.value = "musicOff"
+        } else {
+        element.innerHTML = "Turn Music On"
+        element.value = "musicOn"
+
+
+        }
+      }
+    </script>
   </head>
   <body>
-    <canvas id="good-times" height="500" width="800"></canvas>
+    <header>
+      <h1 class="title">Good Times</h1>
+      <p class="music-button" onclick="toggleMusic(this)" value="musicOn" >Turn Music Off</p>
+    </header>
+    <div class="canvas-container">
+      <canvas id="good-times" height="500" width="800"></canvas>
+    </div>
   </body>
 </html>
