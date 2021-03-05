@@ -9,6 +9,27 @@ const CONSTANTS = {
 
 };
 
+const SPRITES = {
+    0: {
+        SPRITE_X: 4,
+        SPRITE_Y: 5, 
+        SPRITE_WIDTH: 30, 
+        SPRITE_HEIGHT: 23
+    },
+    1: {
+        SPRITE_X: 43,
+        SPRITE_Y: 10, 
+        SPRITE_WIDTH: 16, 
+        SPRITE_HEIGHT: 14
+    },
+    2: {
+        SPRITE_X: 4,
+        SPRITE_Y: 37, 
+        SPRITE_WIDTH: 32, 
+        SPRITE_HEIGHT: 23
+    },
+}
+
 export default class Obstacle {
     constructor(dimensions) {
       this.dimensions = dimensions;
@@ -48,14 +69,25 @@ export default class Obstacle {
     }
     
     drawObstacle(ctx) {
-        // ctx.clearRect(this.x - CONSTANTS.OBSTACLE_WIDTH, this.y - CONSTANTS.OBSTACLE_HEIGHT, CONSTANTS.OBSTACLE_WIDTH, CONSTANTS.OBSTACLE_HEIGHT);
-        // while (true) {
-        this.obstacles.forEach(obst => {
-            ctx.fillStyle = "orange";
+        const foe = new Image();
+        foe.src = './assets/images/enemies.png'
+
+        this.obstacles.forEach((obst, idx )=> {
+            ctx.drawImage(foe, SPRITES[idx].SPRITE_X, SPRITES[idx].SPRITE_Y, 
+                SPRITES[idx].SPRITE_WIDTH, SPRITES[idx].SPRITE_HEIGHT, obst.obstacleStartPoint, obst.obstacleYposition, CONSTANTS.OBSTACLE_WIDTH, CONSTANTS.OBSTACLE_HEIGHT);
+
+            // const SPRITES = {
+            //     0: {
+            //         SPRITE_X: 0,
+            //         SPRITE_Y: 35, 
+            //         SPRITE_WIDTH: 90, 
+            //         SPRITE_HEIGHT: 70
+
+            // ctx.fillStyle = "orange";
 
 
-            ctx.fillRect(
-                obst.obstacleStartPoint, obst.obstacleYposition, CONSTANTS.OBSTACLE_WIDTH, CONSTANTS.OBSTACLE_HEIGHT);
+            // ctx.fillRect(
+            //     obst.obstacleStartPoint, obst.obstacleYposition, CONSTANTS.OBSTACLE_WIDTH, CONSTANTS.OBSTACLE_HEIGHT);
         });
     }
 
