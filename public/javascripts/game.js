@@ -61,7 +61,7 @@ export default class GoodTimes {
         
     }
     
-    handlePressedKeys(e) {
+    handlePressedKeys(e = '') {
         if (( e.key === "s" ) && (this.buttonActive)){ 
             console.log(this.id)
             this.gameOver = false;
@@ -80,7 +80,7 @@ export default class GoodTimes {
         // console.log(e.key)
     }
 
-    stopDudeTrigger(e) {
+    stopDudeTrigger(e = '') {
         this.dude.moveDude(e);
     }
 
