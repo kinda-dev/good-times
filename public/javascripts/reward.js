@@ -1,6 +1,6 @@
 const CONSTANTS = {
-    REWARD_WIDTH: 100,
-    REWARD_HEIGHT: 55,
+    REWARD_WIDTH: 50,
+    REWARD_HEIGHT: 50,
     // how many frames I move per animation
     // variable speed assigned randomly
     // SPEED: Math.random() * 5 + 1,
@@ -24,7 +24,7 @@ export default class Reward {
 
     }
 
-    obstacle(rewardStartPoint) {
+    reward(rewardStartPoint) {
 
         const rewardSpecs = {
             // how many frames I move per animation
@@ -51,11 +51,11 @@ export default class Reward {
         // ctx.clearRect(this.x - CONSTANTS.REWARD_WIDTH, this.y - CONSTANTS.REWARD_HEIGHT, CONSTANTS.REWARD_WIDTH, CONSTANTS.REWARD_HEIGHT);
         // while (true) {
         this.rewards.forEach(rew => {
-            ctx.fillStyle = "orange";
+            ctx.fillStyle = "red";
 
 
             ctx.fillRect(
-                rew.rewardStartPoint, obst.rewardYposition, CONSTANTS.REWARD_WIDTH, CONSTANTS.REWARD_HEIGHT);
+                rew.rewardStartPoint, rew.rewardYposition, CONSTANTS.REWARD_WIDTH, CONSTANTS.REWARD_HEIGHT);
         });
     }
 
@@ -70,7 +70,7 @@ export default class Reward {
 
     moveReward() {
 
-    // // // move obstacles to the left on the orizontal axis
+    // // // move rewacles to the left on the orizontal axis
         this.rewards.forEach(rew => {
             if ( rew.rewardStartPoint + CONSTANTS.REWARD_WIDTH  < 0) {
                 rew.rewardStartPoint = this.x + (Math.random() * (200 - 1) + 1);
@@ -103,9 +103,14 @@ export default class Reward {
 
 
         let collision = false;
-        this.rewards.forEach(obst => {
+        this.rewards.forEach(rew => {
             //check that they don't overlap in the x axis or the y axis
-            if ( _overlap(obst, dude) ) { collision = true; } 
+            if ( _overlap(rew, dude) ) { 
+                rew.rewardStartPoint = this.x + (Math.random() * (200 - 1) + 1);
+                rew.rewardSpeed = Math.random() * 5 + 1;
+                rew.rewardYposition = Math.random() * (450 - 150) + 150;
+                collision = true; 
+            } 
             
             // collision = true;
         });

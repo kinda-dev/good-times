@@ -1,6 +1,7 @@
 import Background from './background';
 import Dude from './dude';
 import Obstacle from './obstacle';
+import Reward from './reward';
 import WaveCrest from './wave';
 
 const OBSTACLES = [];
@@ -19,9 +20,13 @@ export default class GoodTimes {
 
         this.isPlaying = false;
 
+
         this.gameOver = true;
         this.restart = false;
+
+        this.buttonActive = true;
         this.drawStart();
+
     }
 
 
@@ -35,6 +40,9 @@ export default class GoodTimes {
         this.dude = new Dude(this.dimensions);
 
         this.obstacles = new Obstacle(this.dimensions);
+
+        this.rewards = new Reward(this.dimensions);
+
 
         this.wave = new WaveCrest(this.dimensions);
 
@@ -54,8 +62,10 @@ export default class GoodTimes {
     }
     
     handlePressedKeys(e) {
-        if (( e.key === "s" ) && (!this.isPlaying) && (this.gameOver)){ 
+        if (( e.key === "s" ) && (this.buttonActive)){ 
             console.log(this.id)
+            this.gameOver = false;
+            this.isPlaying = true;
             this.startGame();
         }
 
@@ -79,6 +89,12 @@ export default class GoodTimes {
             this.gameOver = true;
         }
         // add logic for adding scores if pickup bonuses
+        if ( this.rewards.collidesWith(this.dude.bounds()) ) {
+            this.score += 10;
+
+            // maybe we can draw something
+        }
+        
     }
 
     handleScore() {
@@ -99,6 +115,8 @@ export default class GoodTimes {
         this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height)
         if ( this.gameOver ) {
             
+            this.buttonActive = false;
+
             this.isPlaying = false;
             if ( !this.restart ) {
                 this.drawGameOver();
@@ -109,9 +127,11 @@ export default class GoodTimes {
             // alert('what the hell');
         } else {
 
+        this.buttonActive = false;
         this.handleScore();
+        this.collision()
 
-        // draw the background this is to comment in
+        // drasw the background this is to comment in
         this.background.animate(this.ctx);
 
         // draw the dude after the backround so it doesn't get covered
@@ -119,13 +139,13 @@ export default class GoodTimes {
         
         this.obstacles.animate(this.ctx);
 
+        this.rewards.animate(this.ctx);
         // below should be the last to animate
         this.wave.animate(this.ctx);
 
         if (this.isPitted) {
             this.drawPitted();
         }
-        this.collision()
 
         this.drawScore()
         }
