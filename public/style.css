@@ -8,3 +8,11 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+#pause-riff {
+  display: none;
+}
+
+.music-button {
+  cursor: pointer;
+}

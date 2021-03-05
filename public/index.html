@@ -11,11 +11,14 @@
     <script>
       function toggleMusic(element) {
         if ( element.value === "musicOn") {
-        element.innerHTML = "Turn Music Off"
-        element.value = "musicOff"
+          document.getElementById('pause-riff').muted= false;
+
+          element.innerHTML = "Turn Music Off"
+          element.value = "musicOff"
         } else {
-        element.innerHTML = "Turn Music On"
-        element.value = "musicOn"
+          document.getElementById('pause-riff').muted= true;
+          element.innerHTML = "Turn Music On"
+          element.value = "musicOn"
 
 
         }
@@ -26,6 +29,9 @@
     <header>
       <h1 class="title">Good Times</h1>
       <p class="music-button" onclick="toggleMusic(this)" value="musicOn" >Turn Music Off</p>
+      <audio id="pause-riff" controls loop>
+         <source src="./assets/non-play-riff.mp3"> 
+      </audio>
     </header>
     <div class="canvas-container">
       <canvas id="good-times" height="500" width="800"></canvas>

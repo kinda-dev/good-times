@@ -13,7 +13,8 @@ export default class GoodTimes {
         this.loc = canvas;
   
         this.starterListener();
-
+        this.pauseRiff = document.getElementById('pause-riff')
+        this.pauseRiff.play();
 
         this.score = 0;
         this.isPitted = false;
@@ -96,7 +97,7 @@ export default class GoodTimes {
 
     collision() {
         if ( this.obstacles.collidesWith(this.dude.bounds()) ) {
-            // this.gameOver = true;
+            this.gameOver = true;
         }
         // add logic for adding scores if pickup bonuses
         if ( this.rewards.collidesWith(this.dude.bounds()) ) {
@@ -125,18 +126,23 @@ export default class GoodTimes {
         this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height)
         if ( this.gameOver ) {
             
+            this.pauseRiff.play();
+            
             this.buttonActive = false;
 
             this.isPlaying = false;
             if ( !this.restart ) {
+
                 this.drawGameOver();
             } else {
-            this.drawStart();
+
+                this.drawStart();
             }
             
             // alert('what the hell');
         } else {
-
+          
+            this.pauseRiff.pause();
         this.buttonActive = false;
         this.handleScore();
         this.collision()
