@@ -1,6 +1,6 @@
 const CONSTANTS = {
-    OBSTACLE_WIDTH: 90,
-    OBSTACLE_HEIGHT: 45,
+    OBSTACLE_WIDTH: 70,
+    OBSTACLE_HEIGHT: 35,
     // how many frames I move per animation
     // variable speed assigned randomly
     // SPEED: Math.random() * 5 + 1,

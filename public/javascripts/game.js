@@ -172,7 +172,7 @@ export default class GoodTimes {
     drawPitted() {
         const loc = {x: this.dimensions.width / 3.5, y: this.dimensions.height / 6}
         this.ctx.font = "bold 20pt 'DotGothic16', sans-serif";
-        this.ctx.fillStyle = "white";
+        this.ctx.fillStyle = "yellow";
         this.ctx.fillText("Gnarly!! Double Points!!", loc.x, loc.y);
         this.ctx.strokeStyle = "black";
         this.ctx.lineWidth = 1;

@@ -3,7 +3,7 @@ const CONSTANTS = {
     DUDE_HEIGHT: 100,
     // how many frames I move per animation
     // 12 was ideal using .keyCode ad event listener
-    SPEED: 12,
+    SPEED: 10,
     // pullback value to test
     WAVE_PULLBACK: 1
 
