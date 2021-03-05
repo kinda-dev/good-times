@@ -12,7 +12,7 @@ export default class GoodTimes {
         this.dimensions = { width: canvas.width, height: canvas.height};
         this.loc = canvas;
   
-        this.registerEvents();
+        this.starterListener();
 
 
         this.score = 0;
@@ -58,16 +58,26 @@ export default class GoodTimes {
         this.boundDudeStopHandler = this.stopDudeTrigger.bind(this);
         document.addEventListener("keydown", this.boundKeyDown);
         document.addEventListener("keyup", this.boundDudeStopHandler);
-        
+
     }
-    
-    handlePressedKeys(e = '') {
+
+    starterListener() {
+        this.boundStarter = this.starter.bind(this);
+        document.addEventListener("keydown", this.boundStarter);
+
+    }
+
+    starter(e = '') {
         if (( e.key === "s" ) && (this.buttonActive)){ 
             console.log(this.id)
             this.gameOver = false;
             this.isPlaying = true;
             this.startGame();
         }
+    }
+    
+    handlePressedKeys(e = '') {
+  
 
         if (( e.key === "Enter" ) && (!this.isPlaying) && (this.gameOver)){ 
           this.restart = true;
@@ -75,7 +85,7 @@ export default class GoodTimes {
         }
 
         if (( e.key === "p" ) || ( e.key === "P")) { this.playPause() };
-
+        
         this.dude.moveDude(e);
         // console.log(e.key)
     }
