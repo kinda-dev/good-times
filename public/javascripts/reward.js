@@ -1,6 +1,6 @@
 const CONSTANTS = {
-    REWARD_WIDTH: 50,
-    REWARD_HEIGHT: 50,
+    REWARD_WIDTH: 40,
+    REWARD_HEIGHT: 40,
     // how many frames I move per animation
     // variable speed assigned randomly
     // SPEED: Math.random() * 5 + 1,

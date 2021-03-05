@@ -1,6 +1,6 @@
 const CONSTANTS = {
-    DUDE_WIDTH: 100,
-    DUDE_HEIGHT: 110,
+    DUDE_WIDTH: 90,
+    DUDE_HEIGHT: 100,
     // how many frames I move per animation
     // 12 was ideal using .keyCode ad event listener
     SPEED: 12,
