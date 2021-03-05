@@ -1,11 +1,6 @@
 const CONSTANTS = {
     REWARD_WIDTH: 40,
     REWARD_HEIGHT: 40,
-    // how many frames I move per animation
-    // variable speed assigned randomly
-    // SPEED: Math.random() * 5 + 1,
-    // pullback value to test
-    // WAVE_PULLBACK: 1
 
 };
 
@@ -27,20 +22,9 @@ export default class Reward {
     reward(rewardStartPoint) {
 
         const rewardSpecs = {
-            // how many frames I move per animation
-            // variable speed assigned randomly
             rewardSpeed: Math.random() * 5 + 1,
-            // obstacle position on y axis
-            // randomly calculated as follows Math.random() * (max - min) + min
-
-            // aka top
             rewardYposition: Math.random() * (450 - 150) + 150,
-            // aka left
             rewardStartPoint: rewardStartPoint,
-            // aka right
-            // obstacleRight: obstacleStartPoint + CONSTANTS.REWARD_WIDTH,
-            // aka bottom
-            // obstacleBottom: rewardYposition + CONSTANTS.REWARD_HEIGHT
         }
 
         return rewardSpecs;
@@ -48,18 +32,21 @@ export default class Reward {
     }
     
     drawreward(ctx) {
-        // ctx.clearRect(this.x - CONSTANTS.REWARD_WIDTH, this.y - CONSTANTS.REWARD_HEIGHT, CONSTANTS.REWARD_WIDTH, CONSTANTS.REWARD_HEIGHT);
-        // while (true) {
+        const shaka = new Image();
+        shaka.src = './assets/images/shaka.png'
         this.rewards.forEach(rew => {
-            ctx.fillStyle = "red";
+
+            ctx.drawImage(shaka, 0, 0, 356, 293, rew.rewardStartPoint, rew.rewardYposition, CONSTANTS.REWARD_WIDTH, CONSTANTS.REWARD_HEIGHT);
+
+        //     ctx.fillStyle = "red";
 
 
-            ctx.fillRect(
-                rew.rewardStartPoint, rew.rewardYposition, CONSTANTS.REWARD_WIDTH, CONSTANTS.REWARD_HEIGHT);
+        //     ctx.fillRect(
+        //         rew.rewardStartPoint, rew.rewardYposition, CONSTANTS.REWARD_WIDTH, CONSTANTS.REWARD_HEIGHT);
         });
     }
 
-    // }
+    
 
     animate(ctx) {
 
@@ -111,8 +98,6 @@ export default class Reward {
                 rew.rewardYposition = Math.random() * (450 - 150) + 150;
                 collision = true; 
             } 
-            
-            // collision = true;
         });
         return collision;
 

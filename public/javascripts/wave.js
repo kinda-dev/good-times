@@ -19,7 +19,7 @@
       background() {
         const background = new Image();
         // background.src = 'https://good-times-surfing-game.s3-us-west-1.amazonaws.com/background.png';
-        background.src = './assets/images/wave.png';
+        background.src = './assets/images/wave1.png';
   
         return background;
       }
