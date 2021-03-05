@@ -13,7 +13,9 @@ export default class GoodTimes {
         this.loc = canvas;
   
         this.starterListener();
-        this.pauseRiff = document.getElementById('pause-riff')
+        this.pauseRiff = document.getElementById('pause-riff');
+        this.playRiff = document.getElementById('play-riff')
+
         this.pauseRiff.play();
 
         this.score = 0;
@@ -125,6 +127,8 @@ export default class GoodTimes {
     animate() {
         this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height)
         if ( this.gameOver ) {
+            this.playRiff.pause();
+            // this.playRiff.currentTime = 0;
             
             this.pauseRiff.play();
             
@@ -142,7 +146,11 @@ export default class GoodTimes {
             // alert('what the hell');
         } else {
           
-            this.pauseRiff.pause();
+        this.pauseRiff.pause();
+        // this.pauseRiff.currentTime = 0;
+
+        this.playRiff.play();
+
         this.buttonActive = false;
         this.handleScore();
         this.collision()
