@@ -2,12 +2,14 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Good Times</title>
     <script type="text/javascript" src="./bundle.js"></script>
-    <!-- <script type="text/javascript" src="keymaster.js"></script> -->
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/e93199a89e.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="favicon.svg" />
+  </head>
     <script>
       function toggleMusic(element) {
         if ( element.value === "musicOn") {
@@ -15,30 +17,37 @@
           element.muted= false;
 
 
-          element.innerHTML = "Turn Music Off"
+          element.className="fas fa-volume-up"
           element.value = "musicOff"
         } else {
           document.getElementById('play-riff').muted= true;
           element.muted= true;
 
-          element.innerHTML = "Turn Music On"
+          element.className = "fas fa-volume-mute"
           element.value = "musicOn"
 
 
         }
       }
     </script>
-  </head>
   <body class="body">
+    <audio id="play-riff" loop autoplay>
+      <source src="./assets/play-riff.mp3"> 
+   </audio>
     <header class="header">
-      <h1 class="title">WipeOut</h1>
-      <div class="music-button-wrap" onclick=toggleMusic(this)><p class="music-button" value="musicOn" >Turn Music Off</p></div>
-      <!-- <audio id="pause-riff" controls loop autoplay>
-         <source src="./assets/non-play-riff.mp3"> 
-      </audio> -->
-      <audio id="play-riff" controls loop autoplay>
-        <source src="./assets/play-riff.mp3"> 
-     </audio>
+      <div class="header-left-wrap">
+        <div class="title-wrap"><h1 class="title">WipeOut</h1></div>
+        <div class="volume-button-wrap"><i onclick=toggleMusic(this)  value="musicOn" class="fas fa-volume-up"></i></div>
+      </div>
+      <div class="header-right-wrap">
+        <a class="email-button" href="mailto:maybe.fabio@gmail.com" target="_blank">@</a>
+
+        <a class="github-button-wrap" href="https://github.com/kinda-dev" target="_blank"><i class="fab fa-github"></i></a>
+      </div>
+      <!-- <i class="fas fa-arrow-circle-left"></i>
+      <i class="fas fa-arrow-circle-right"></i>
+      <i class="fas fa-arrow-circle-up"></i>
+      <i class="fas fa-arrow-circle-down"></i> -->
     </header>
     <div class="canvas-container">
       <canvas id="good-times" height="500" width="800"></canvas>

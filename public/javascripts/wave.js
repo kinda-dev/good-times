@@ -7,13 +7,13 @@
 //   };
 
 const SPRITES = {
-  1: {
+  2: {
       SPRITE_X: 0,
       SPRITE_Y: 0, 
       SPRITE_WIDTH: 348, 
       SPRITE_HEIGHT: 489
   },
-  2: {
+  1: {
       SPRITE_X: 351,
       SPRITE_Y: 0, 
       SPRITE_WIDTH: 346, 
@@ -36,11 +36,13 @@ const SPRITES = {
         // this.backgroundWidth = this.dimensions.width
 
         this.waves = [
-          this.wave(this.x -16),
           this.wave(this.x),
-          this.wave(this.x + 32)
+          this.wave(this.x),
+          this.wave(this.x)
           
-        ]
+        ],
+
+        this.idx = 0
   
       }
 
@@ -55,13 +57,7 @@ const SPRITES = {
 
     }
     
-      // background() {
-      //   const background = new Image();
-      //   // background.src = 'https://good-times-surfing-game.s3-us-west-1.amazonaws.com/background.png';
-      //   background.src = './assets/images/wave1.png';
-  
-      //   return background;
-      // }
+
 
       drawWave(ctx) {
         const waveCrest = new Image();
@@ -72,14 +68,17 @@ const SPRITES = {
                 SPRITES[idx].SPRITE_WIDTH, SPRITES[idx].SPRITE_HEIGHT, 
                 wave.waveStartPoint, 95, 
                 SPRITES[idx].SPRITE_WIDTH, SPRITES[idx].SPRITE_HEIGHT);
-
           // ctx.fillStyle = "orange";
-
-
           // ctx.fillRect(
           //     obst.obstacleStartPoint, obst.obstacleYposition, CONSTANTS.OBSTACLE_WIDTH, CONSTANTS.OBSTACLE_HEIGHT);
-        
           });
+          // if (this.idx === 2) {this.idx = 0};
+          // const length = this.waves.length;
+          // ctx.drawImage(waveCrest, SPRITES[this.idx].SPRITE_X, SPRITES[this.idx].SPRITE_Y, 
+          //   SPRITES[this.idx].SPRITE_WIDTH, SPRITES[this.idx].SPRITE_HEIGHT, 
+          //   this.waves[this.idx].waveStartPoint, 95, 
+          //   SPRITES[this.idx].SPRITE_WIDTH, SPRITES[this.idx].SPRITE_HEIGHT);
+          // this.idx ++
 
       }
 
@@ -99,6 +98,7 @@ const SPRITES = {
   
       //create animate mthod to be invoked in other classes
       animate(ctx) {
+        // setInterval(this.drawWave(ctx), 2000);
           this.drawWave(ctx);
           this.moveWave();
       }
