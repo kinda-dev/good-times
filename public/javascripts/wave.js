@@ -7,19 +7,19 @@
 //   };
 
 const SPRITES = {
-  0: {
+  1: {
       SPRITE_X: 0,
       SPRITE_Y: 0, 
       SPRITE_WIDTH: 348, 
       SPRITE_HEIGHT: 489
   },
-  1: {
+  2: {
       SPRITE_X: 351,
       SPRITE_Y: 0, 
       SPRITE_WIDTH: 346, 
       SPRITE_HEIGHT: 489
   },
-  2: {
+  0: {
       SPRITE_X: 699,
       SPRITE_Y: 0, 
       SPRITE_WIDTH: 352, 

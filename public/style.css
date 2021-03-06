@@ -1,12 +1,12 @@
 .body {
-  background-color: rgb(0, 183, 255);
+  background-color: rgb(255, 217, 0);
   font-family: "DotGothic16", sans-serif;
 }
 
 #good-times {
   width: 800px;
   height: 500px;
-  border: 1px solid black;
+  border: 3px dotted white;
   background: transparent;
   position: absolute;
   top: 50%;
@@ -32,6 +32,7 @@
   top: 0;
   left: 0;
   right: 0;
+  z-index: 10;
 }
 
 .title {
@@ -39,21 +40,23 @@
   color: white;
   -webkit-text-stroke: 1px black;
   margin: 0;
-  font-weight: bold;
+  font-weight: 900;
 }
 
 .music-button-wrap {
   padding-right: 5px;
   padding-left: 5px;
   display: flex;
-  border: 2px solid blue;
+  border: 2px solid white;
   border-radius: 12px;
+  cursor: pointer;
   /* background: blue; */
 }
 
 .music-button {
-  cursor: pointer;
   color: white;
+  font-size: 20px;
   font-weight: 600;
-  -webkit-text-stroke: 1px black;
+  /* -webkit-text-stroke: 1px black; */
+  text-decoration: none;
 }

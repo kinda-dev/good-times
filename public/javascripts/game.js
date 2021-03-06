@@ -13,10 +13,6 @@ export default class GoodTimes {
         this.loc = canvas;
   
         this.starterListener();
-        this.pauseRiff = document.getElementById('pause-riff');
-        this.playRiff = document.getElementById('play-riff')
-
-        this.pauseRiff.play();
 
         this.score = 0;
         this.isPitted = false;
@@ -31,7 +27,6 @@ export default class GoodTimes {
         this.drawStart();
 
     }
-
 
 
     startGame() {
@@ -83,6 +78,7 @@ export default class GoodTimes {
   
 
         if (( e.key === "Enter" ) && (!this.isPlaying) && (this.gameOver)){ 
+
           this.restart = true;
           console.log(this.restart)
         }
@@ -127,29 +123,21 @@ export default class GoodTimes {
     animate() {
         this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height)
         if ( this.gameOver ) {
-            this.playRiff.pause();
             // this.playRiff.currentTime = 0;
             
-            this.pauseRiff.play();
             
             this.buttonActive = false;
 
             this.isPlaying = false;
             if ( !this.restart ) {
-
                 this.drawGameOver();
             } else {
-
                 this.drawStart();
             }
             
             // alert('what the hell');
         } else {
           
-        this.pauseRiff.pause();
-        // this.pauseRiff.currentTime = 0;
-
-        this.playRiff.play();
 
         this.buttonActive = false;
         this.handleScore();

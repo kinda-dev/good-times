@@ -11,15 +11,15 @@
     <script>
       function toggleMusic(element) {
         if ( element.value === "musicOn") {
-          document.getElementById('pause-riff').muted= false;
           document.getElementById('play-riff').muted= false;
+          element.muted= false;
 
 
           element.innerHTML = "Turn Music Off"
           element.value = "musicOff"
         } else {
-          document.getElementById('pause-riff').muted= true;
-          document.getElementById('play-riff').muted= false;
+          document.getElementById('play-riff').muted= true;
+          element.muted= true;
 
           element.innerHTML = "Turn Music On"
           element.value = "musicOn"
@@ -31,12 +31,12 @@
   </head>
   <body class="body">
     <header class="header">
-      <h1 class="title">Good Times</h1>
-      <div class="music-button-wrap"><p class="music-button" onclick="toggleMusic(this)" value="musicOn" >Turn Music Off</p></div>
-      <audio id="pause-riff" controls loop>
+      <h1 class="title">WipeOut</h1>
+      <div class="music-button-wrap" onclick=toggleMusic(this)><p class="music-button" value="musicOn" >Turn Music Off</p></div>
+      <!-- <audio id="pause-riff" controls loop autoplay>
          <source src="./assets/non-play-riff.mp3"> 
-      </audio>
-      <audio id="play-riff" controls loop>
+      </audio> -->
+      <audio id="play-riff" controls loop autoplay>
         <source src="./assets/play-riff.mp3"> 
      </audio>
     </header>
