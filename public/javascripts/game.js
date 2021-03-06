@@ -4,8 +4,6 @@ import Obstacle from './obstacle';
 import Reward from './reward';
 import WaveCrest from './wave';
 
-const OBSTACLES = [];
-
 export default class GoodTimes {
     constructor(canvas) {
         this.ctx = canvas.getContext('2d');
@@ -137,7 +135,6 @@ export default class GoodTimes {
             
             // alert('what the hell');
         } else {
-          
 
         this.buttonActive = false;
         this.handleScore();
@@ -182,8 +179,8 @@ export default class GoodTimes {
     }
 
     drawPitted() {
-        const loc = {x: this.dimensions.width / 3.5, y: this.dimensions.height / 6}
-        this.ctx.font = "bold 20pt 'DotGothic16', sans-serif";
+        const loc = {x: this.dimensions.width / 4.5, y: this.dimensions.height / 6}
+        this.ctx.font = "bold 30pt 'DotGothic16', sans-serif";
         this.ctx.fillStyle = "yellow";
         this.ctx.fillText("Gnarly!! Double Points!!", loc.x, loc.y);
         this.ctx.strokeStyle = "black";
@@ -193,25 +190,78 @@ export default class GoodTimes {
     }
 
     drawStart() {
-        const loc = {x: this.dimensions.width / 3.5, y: this.dimensions.height / 6}
+        const loc = {x: this.dimensions.width / 7, y: this.dimensions.height / 4}
         this.ctx.font = "bold 20pt 'DotGothic16', sans-serif";
-        this.ctx.fillStyle = "white";
-        this.ctx.fillText("Press 's' to start a new game", loc.x, loc.y);
+        this.ctx.fillStyle = "yellow";
+        this.ctx.fillText("Press 'S' to start a new game", loc.x, loc.y);
         this.ctx.strokeStyle = "black";
         this.ctx.lineWidth = 1;
-        this.ctx.strokeText("Press 's' to start a new game", loc.x, loc.y);
+        this.ctx.strokeText("Press 'S' to start a new game", loc.x, loc.y);
+
+        this.ctx.fillStyle = "white";
+        this.ctx.fillText("Controls:", loc.x, loc.y + 60);
+        this.ctx.strokeStyle = "black";
+        this.ctx.lineWidth = 1;
+        this.ctx.strokeText("Controls:", loc.x, loc.y + 60);
+
+        this.ctx.fillText("- Move the dude using Keyboard arrows", loc.x, loc.y + 90);
+        this.ctx.strokeStyle = "black";
+        this.ctx.lineWidth = 1;
+        this.ctx.strokeText("- Move the dude using Keyboard arrows", loc.x, loc.y + 90);
+
+        this.ctx.fillText("- Collect the Shaka Hands or surf", loc.x, loc.y + 120);
+        this.ctx.strokeStyle = "black";
+        this.ctx.lineWidth = 1;
+        this.ctx.strokeText("- Collect the Shaka Hands or surf", loc.x, loc.y + 120);
+
+        this.ctx.fillText("  under the wave for extra points", loc.x, loc.y + 150);
+        this.ctx.strokeStyle = "black";
+        this.ctx.lineWidth = 1;
+        this.ctx.strokeText("  under the wave for extra points", loc.x, loc.y + 150);
+
+        this.ctx.fillText("- Avoid floating folks and floating objects", loc.x, loc.y + 180);
+        this.ctx.strokeStyle = "black";
+        this.ctx.lineWidth = 1;
+        this.ctx.strokeText("- Avoid floating folks and floating objects", loc.x, loc.y + 180);
+
+        this.ctx.fillText("  or the game will be over", loc.x, loc.y + 210);
+        this.ctx.strokeStyle = "black";
+        this.ctx.lineWidth = 1;
+        this.ctx.strokeText("  or the game will be over", loc.x, loc.y + 210);
 
     }
 
     drawGameOver() {
-        const loc = {x: this.dimensions.width / 3.5, y: this.dimensions.height / 6}
+
+        const loc = {x: this.dimensions.width / 7, y: this.dimensions.height / 4}
         this.ctx.font = "bold 20pt 'DotGothic16', sans-serif";
         this.ctx.fillStyle = "white";
-        this.ctx.fillText("The Game is Over press Enter to reset the game", loc.x, loc.y);
+        this.ctx.fillText("The Game is Over your score is: " + Math.trunc(this.score), loc.x, loc.y);
         this.ctx.strokeStyle = "black";
         this.ctx.lineWidth = 1;
-        this.ctx.strokeText("The Game is Over press Enter to reset the game", loc.x, loc.y);
+        this.ctx.strokeText("The Game is Over your score is: " + Math.trunc(this.score), loc.x, loc.y);
 
+        this.ctx.fillStyle = "yellow";
+        this.ctx.fillText("Hopefully you enjoyed playing this game", loc.x, loc.y + 60);
+        this.ctx.strokeStyle = "black";
+        this.ctx.lineWidth = 1;
+        this.ctx.strokeText("Hopefully you enjoyed playing this game", loc.x, loc.y + 60);
+
+        this.ctx.fillText("as much as I did making it.", loc.x, loc.y + 90);
+        this.ctx.strokeStyle = "black";
+        this.ctx.lineWidth = 1;
+        this.ctx.strokeText("as much as I did making it.", loc.x, loc.y + 90);
+
+        this.ctx.fillText("Thank you for playing. With pleasure, Fabio.", loc.x, loc.y + 150);
+        this.ctx.strokeStyle = "black";
+        this.ctx.lineWidth = 1;
+        this.ctx.strokeText("Thank you for playing. With pleasure, Fabio.", loc.x, loc.y + 150);
+
+        this.ctx.fillStyle = "white";
+        this.ctx.fillText("To play again press Enter", loc.x, loc.y + 200);
+        this.ctx.strokeStyle = "black";
+        this.ctx.lineWidth = 1;
+        this.ctx.strokeText("To play again press Enter", loc.x, loc.y + 200);
     }
 
     
