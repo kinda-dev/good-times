@@ -70,7 +70,7 @@ export default class Obstacle {
     
     drawObstacle(ctx) {
         const foe = new Image();
-        foe.src = './assets/images/enemies.png'
+        foe.src = 'https://good-times-surfing-game.s3-us-west-1.amazonaws.com/enemies.png'
 
         this.obstacles.forEach((obst, idx )=> {
             ctx.drawImage(foe, SPRITES[idx].SPRITE_X, SPRITES[idx].SPRITE_Y, 

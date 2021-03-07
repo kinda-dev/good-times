@@ -33,7 +33,7 @@ export default class Reward {
     
     drawreward(ctx) {
         const shaka = new Image();
-        shaka.src = './assets/images/shaka.png'
+        shaka.src = 'https://good-times-surfing-game.s3-us-west-1.amazonaws.com/shaka.png'
         this.rewards.forEach(rew => {
 
             ctx.drawImage(shaka, 0, 0, 356, 293, rew.rewardStartPoint, rew.rewardYposition, CONSTANTS.REWARD_WIDTH, CONSTANTS.REWARD_HEIGHT);

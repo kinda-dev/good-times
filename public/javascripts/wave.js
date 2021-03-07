@@ -61,7 +61,7 @@ const SPRITES = {
 
       drawWave(ctx) {
         const waveCrest = new Image();
-        waveCrest.src = './assets/images/wave.png';
+        waveCrest.src = 'https://good-times-surfing-game.s3-us-west-1.amazonaws.com/wave.png';
           
           this.waves.forEach((wave, idx)=> {
             ctx.drawImage(waveCrest, SPRITES[idx].SPRITE_X, SPRITES[idx].SPRITE_Y, 

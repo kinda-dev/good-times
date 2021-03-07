@@ -9,6 +9,7 @@ export default class GoodTimes {
         this.ctx = canvas.getContext('2d');
         this.dimensions = { width: canvas.width, height: canvas.height};
         this.loc = canvas;
+        
   
         this.starterListener();
 
@@ -23,9 +24,7 @@ export default class GoodTimes {
 
         this.buttonActive = true;
         this.drawStart();
-
     }
-
 
     startGame() {
         this.gameOver = false;
@@ -119,6 +118,7 @@ export default class GoodTimes {
 
     // first I am going to crate an animate method
     animate() {
+        document.getElementById('play-riff').play()
         this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height)
         if ( this.gameOver ) {
             // this.playRiff.currentTime = 0;

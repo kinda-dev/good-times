@@ -26,7 +26,7 @@ export default class Dude {
     
     drawDude(ctx) {
         const dude = new Image();
-        dude.src = './assets/images/surfer_sprite.png'
+        dude.src = 'https://good-times-surfing-game.s3-us-west-1.amazonaws.com/surfer_sprite.png'
         // ctx.clearRect(this.x - CONSTANTS.DUDE_WIDTH, this.y - CONSTANTS.DUDE_HEIGHT, CONSTANTS.DUDE_WIDTH, CONSTANTS.DUDE_HEIGHT);
         ctx.drawImage(dude, this.spriteX, this.spriteY, this.spriteWidth, this.spriteHeight, this.x, this.y, CONSTANTS.DUDE_WIDTH, CONSTANTS.DUDE_HEIGHT);
         
