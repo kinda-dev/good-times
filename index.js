@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener("keydown", (e) => {
     // canvas = document.getElementById('good-times');
-    if ( e.key === "Enter" ) {
+    if ( e.key === "r" ) {
         new GoodTimes(canvas);
     }
 });
