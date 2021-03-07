@@ -130,6 +130,7 @@ export default class GoodTimes {
             if ( !this.restart ) {
                 this.drawGameOver();
             } else {
+                delete this.drawStart();
                 this.drawStart();
             }
             
