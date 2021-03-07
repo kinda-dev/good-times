@@ -9,6 +9,8 @@
   height: 80vh;
   border: 3px dotted white;
   background: rgb(56, 56, 165);
+  /* object-fit: contain; */
+  background-image: url("https://good-times-surfing-game.s3-us-west-1.amazonaws.com/start_bckgrd.png");
   position: absolute;
   /* top: 50%; */
   left: 10%;

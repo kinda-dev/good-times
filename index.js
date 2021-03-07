@@ -1,6 +1,8 @@
 const axios = require('axios');
 import GoodTimes from './public/javascripts/game';
 
+let canvas = '';
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // let isbn = '0201558025';
@@ -21,15 +23,13 @@ document.addEventListener('DOMContentLoaded', () => {
     //     console.log(error);
     // });
 
-    const canvas = document.getElementById('good-times');
+    canvas = document.getElementById('good-times');
     new GoodTimes(canvas);
-    console.log('webpack is working!')
     
 })
 
 document.addEventListener("keydown", (e) => {
-    // debugger
-    const canvas = document.getElementById('good-times');
+    // canvas = document.getElementById('good-times');
     if ( e.key === "Enter" ) {
         new GoodTimes(canvas);
     }

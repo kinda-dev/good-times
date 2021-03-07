@@ -7,6 +7,7 @@ import WaveCrest from './wave';
 export default class GoodTimes {
     constructor(canvas) {
         this.ctx = canvas.getContext('2d');
+        this.ctx.clearRect(0, 0, canvas.width, canvas.height);
         this.dimensions = { width: canvas.width, height: canvas.height};
         this.loc = canvas;
         
@@ -64,7 +65,6 @@ export default class GoodTimes {
 
     starter(e = '') {
         if (( e.key === "s" ) && (this.buttonActive)){ 
-            console.log(this.id)
             this.gameOver = false;
             this.isPlaying = true;
             this.startGame();
@@ -75,9 +75,7 @@ export default class GoodTimes {
   
 
         if (( e.key === "Enter" ) && (!this.isPlaying) && (this.gameOver)){ 
-
           this.restart = true;
-          console.log(this.restart)
         }
 
         if (( e.key === "p" ) || ( e.key === "P")) { this.playPause() };
@@ -107,7 +105,6 @@ export default class GoodTimes {
         if (this.dude.bounds().right < 180) {
             this.score += 0.08;
             this.isPitted = true;
-            console.log('pitted')
 
         } else {
         this.score += 0.04;
@@ -121,6 +118,7 @@ export default class GoodTimes {
         document.getElementById('play-riff').play()
         this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height)
         if ( this.gameOver ) {
+
             // this.playRiff.currentTime = 0;
             
             
@@ -130,7 +128,6 @@ export default class GoodTimes {
             if ( !this.restart ) {
                 this.drawGameOver();
             } else {
-                delete this.drawStart();
                 this.drawStart();
             }
             
@@ -199,7 +196,7 @@ export default class GoodTimes {
         this.ctx.lineWidth = 1;
         this.ctx.strokeText("Press 'S' to start a new game", loc.x, loc.y);
 
-        this.ctx.fillStyle = "white";
+        // this.ctx.fillStyle = "white";
         this.ctx.fillText("Controls:", loc.x, loc.y + 60);
         this.ctx.strokeStyle = "black";
         this.ctx.lineWidth = 1;
@@ -236,13 +233,13 @@ export default class GoodTimes {
 
         const loc = {x: this.dimensions.width / 7, y: this.dimensions.height / 4}
         this.ctx.font = "bold 20pt 'DotGothic16', sans-serif";
-        this.ctx.fillStyle = "white";
+        this.ctx.fillStyle = "yellow";
         this.ctx.fillText("The Game is Over your score is: " + Math.trunc(this.score), loc.x, loc.y);
         this.ctx.strokeStyle = "black";
         this.ctx.lineWidth = 1;
         this.ctx.strokeText("The Game is Over your score is: " + Math.trunc(this.score), loc.x, loc.y);
 
-        this.ctx.fillStyle = "yellow";
+        this.ctx.fillStyle = "blue";
         this.ctx.fillText("Hopefully you enjoyed playing this game", loc.x, loc.y + 60);
         this.ctx.strokeStyle = "black";
         this.ctx.lineWidth = 1;
@@ -258,7 +255,7 @@ export default class GoodTimes {
         this.ctx.lineWidth = 1;
         this.ctx.strokeText("Thank you for playing. With pleasure, Fabio.", loc.x, loc.y + 150);
 
-        this.ctx.fillStyle = "white";
+        this.ctx.fillStyle = "yellow";
         this.ctx.fillText("To play again press Enter", loc.x, loc.y + 200);
         this.ctx.strokeStyle = "black";
         this.ctx.lineWidth = 1;
