@@ -1,5 +1,5 @@
 const axios = require('axios');
-import GoodTimes from './game';
+import GoodTimes from './public/javascripts/game';
 
 document.addEventListener('DOMContentLoaded', () => {
 
