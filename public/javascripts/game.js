@@ -10,27 +10,18 @@ export default class GoodTimes {
         this.ctx.clearRect(0, 0, canvas.width, canvas.height);
         this.dimensions = { width: canvas.width, height: canvas.height};
         this.loc = canvas;
-        
-  
-        this.starterListener();
-
+        this.id = '';
         this.score = 0;
         this.isPitted = false;
+        this.gameOver = false;
 
-        this.isPlaying = false;
-
-
-        this.gameOver = true;
-        this.restart = false;
-
-        this.buttonActive = true;
-        this.drawStart();
     }
 
     startGame() {
+        this.score = 0;
         this.gameOver = false;
-        // create instance of background
-        this.isPlaying = true;
+        const element = document.getElementById('play-riff').muted= false;
+
         this.background = new Background(this.dimensions);
         // create instance of dude after the backround so it doesn't get covered
         this.dude = new Dude(this.dimensions);
@@ -42,14 +33,14 @@ export default class GoodTimes {
 
         this.wave = new WaveCrest(this.dimensions);
 
-        this.registerEvents();
+        this.registerKeyEvents();
         this.collision();
 
         // triggers animate condinoals to trigger will go here
         this.animate();
     }
 
-    registerEvents() {
+    registerKeyEvents() {
         this.boundKeyDown = this.handlePressedKeys.bind(this);
         this.boundDudeStopHandler = this.stopDudeTrigger.bind(this);
         document.addEventListener("keydown", this.boundKeyDown);
@@ -57,31 +48,16 @@ export default class GoodTimes {
 
     }
 
-    starterListener() {
-        this.boundStarter = this.starter.bind(this);
-        document.addEventListener("keydown", this.boundStarter);
-
-    }
-
-    starter(e = '') {
-        if (( e.key === "Enter" ) && (this.buttonActive)){ 
-            this.gameOver = false;
-            this.isPlaying = true;
-            this.startGame();
-        }
+    removeRegisterKeyEvents() {
+        this.boundKeyDown = this.handlePressedKeys.bind(this);
+        this.boundDudeStopHandler = this.stopDudeTrigger.bind(this);
+        document.removeEventListener("keydown", this.boundKeyDown);
+        document.removeEventListener("keyup", this.boundDudeStopHandler);
     }
     
     handlePressedKeys(e = '') {
-  
-
-        if (( e.key === "r" ) && (!this.isPlaying) && (this.gameOver)){ 
-          this.restart = true;
-        }
-
-        if (( e.key === "p" ) || ( e.key === "P")) { this.playPause() };
         
         this.dude.moveDude(e);
-        // console.log(e.key)
     }
 
     stopDudeTrigger(e = '') {
@@ -115,26 +91,17 @@ export default class GoodTimes {
 
     // first I am going to crate an animate method
     animate() {
-        document.getElementById('play-riff').play()
         this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height)
+        // const riff = document.getElementById('play-riff').autoplay="true";
+        document.getElementsByClassName('game-over')[0].classList.add('hidden');
+        document.getElementsByClassName('game-container')[0].classList.remove('hidden');
         if ( this.gameOver ) {
-
-            // this.playRiff.currentTime = 0;
-            
-            
-            this.buttonActive = false;
-
-            this.isPlaying = false;
-            if ( !this.restart ) {
-                this.drawGameOver();
-            } else {
-                this.drawStart();
-            }
-            
-            // alert('what the hell');
+            document.getElementsByClassName('game-container')[0].classList.add('hidden');
+            document.getElementsByClassName('game-over')[0].classList.remove('hidden');
+            document.getElementById('your-score').innerHTML="YOUR SCORE IS: " + Math.trunc(this.score)
+            cancelAnimationFrame(this.id);
         } else {
 
-        this.buttonActive = false;
         this.handleScore();
         this.collision()
 
@@ -187,47 +154,6 @@ export default class GoodTimes {
 
     }
 
-    drawStart() {
-        const loc = {x: this.dimensions.width / 7, y: this.dimensions.height / 4}
-        this.ctx.font = "bold 20pt 'DotGothic16', sans-serif";
-        this.ctx.fillStyle = "yellow";
-        this.ctx.fillText("Press 'Enter' to start a new game", loc.x, loc.y);
-        this.ctx.strokeStyle = "black";
-        this.ctx.lineWidth = 1;
-        this.ctx.strokeText("Press 'Enter' to start a new game", loc.x, loc.y);
-
-        // this.ctx.fillStyle = "white";
-        this.ctx.fillText("Controls:", loc.x, loc.y + 60);
-        this.ctx.strokeStyle = "black";
-        this.ctx.lineWidth = 1;
-        this.ctx.strokeText("Controls:", loc.x, loc.y + 60);
-
-        this.ctx.fillText("- Move the dude using Keyboard arrows", loc.x, loc.y + 90);
-        this.ctx.strokeStyle = "black";
-        this.ctx.lineWidth = 1;
-        this.ctx.strokeText("- Move the dude using Keyboard arrows", loc.x, loc.y + 90);
-
-        this.ctx.fillText("- Collect the Shaka Hands or surf", loc.x, loc.y + 120);
-        this.ctx.strokeStyle = "black";
-        this.ctx.lineWidth = 1;
-        this.ctx.strokeText("- Collect the Shaka Hands or surf", loc.x, loc.y + 120);
-
-        this.ctx.fillText("  under the wave for extra points", loc.x, loc.y + 150);
-        this.ctx.strokeStyle = "black";
-        this.ctx.lineWidth = 1;
-        this.ctx.strokeText("  under the wave for extra points", loc.x, loc.y + 150);
-
-        this.ctx.fillText("- Avoid floating folks and floating objects", loc.x, loc.y + 180);
-        this.ctx.strokeStyle = "black";
-        this.ctx.lineWidth = 1;
-        this.ctx.strokeText("- Avoid floating folks and floating objects", loc.x, loc.y + 180);
-
-        this.ctx.fillText("  or the game will be over", loc.x, loc.y + 210);
-        this.ctx.strokeStyle = "black";
-        this.ctx.lineWidth = 1;
-        this.ctx.strokeText("  or the game will be over", loc.x, loc.y + 210);
-
-    }
 
     drawGameOver() {
 

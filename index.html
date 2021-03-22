@@ -33,26 +33,57 @@
         }
       }
     </script>
-    <audio id="play-riff" loop autoplay="true" preload="auto">
+
+    <audio id="play-riff" loop autoplay="true" preload="auto" muted="false">
       <source src="https://good-times-surfing-game.s3-us-west-1.amazonaws.com/play-riff.mp3"> 
    </audio>
-    <header class="header">
-      <div class="header-left-wrap">
+
+    <navbar class="navbar">
+      <div class="navbar-left-wrap">
         <div class="title-wrap"><h1 class="title">Good Times</h1></div>
-        <div class="volume-button-wrap"><i onclick=toggleMusic(this)  value="musicOn" class="fas fa-volume-up"></i></div>
+        <div id="volume-button-wrap" class="hidden"><i onclick=toggleMusic(this)  value="musicOn" class="fas fa-volume-up"></i></div>
       </div>
-      <div class="header-right-wrap">
+      <div class="navbar-right-wrap">
         <a class="email-button" href="mailto:maybe.fabio@gmail.com" target="_blank">@</a>
 
         <a class="github-button-wrap" href="https://github.com/kinda-dev" target="_blank"><i class="fab fa-github"></i></a>
       </div>
-      <!-- <i class="fas fa-arrow-circle-left"></i>
-      <i class="fas fa-arrow-circle-right"></i>
-      <i class="fas fa-arrow-circle-up"></i>
-      <i class="fas fa-arrow-circle-down"></i> -->
-    </header>
-    <div class="canvas-container">
-      <canvas id="good-times" height="500" width="800"></canvas>
+    </navbar>
+
+    <ul class="start-menu no-show">
+      <li ></li>
+    </ul>
+
+    <div class="splash-screen">
+      <article class="splash-text">
+        <p>Welcome to Maverik, California.</p>
+        <p>A big swell is pumping and the sun is warm</p>
+        <p>how long can you surf a perfect wave while having a</p>
+        <p>Good Time?</p>
+      </article>
+      <article class="instructions hidden">
+        <p>Arrow keys - Move the Dude!</p>
+        <p>Collect the " Shaka Hands " or surf under the wave for extra points!</p>
+        <p>There will be floating obstacles coming at you, make sure to avoid them!</p>
+      </article>
+      <div class="splash-buttons-wrap">
+        <button id="show-instructions-button">Instructions</button>
+        <button id="hide-instructions" class="hidden">Hide Instructions</button>
+        <button id="start-game-button">Play Game</button>
+      </div>
+    </div>
+
+
+    <article class="game-over hidden">
+      <p>The Game is over!</p>
+      <p id="your-score"></p>
+      <button id="re-start-game-button">Restart Game</button>
+
+    </article>
+
+
+    <div class="game-container hidden">
+      <canvas id="good-times" height="500" width="800" ></canvas>
     </div>
   </body>
 </html>
