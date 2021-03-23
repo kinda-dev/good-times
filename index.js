@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const leaderBoard = document.getElementById('leader-board-scores');
     const playername = document.getElementById("player-name");
     const score = document.getElementById('your-score');
+    const riff = document.getElementById('play-riff');
 
     playGameButton.addEventListener('mouseover', () => {
         musicOnMsg.innerHTML = "Music will play when you click this";
@@ -50,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     playGameButton.addEventListener('click', () => {
+        riff.play();
         splashScreen.classList.add('hidden');
         volumeButton.classList.remove('hidden');
         let game = new GoodTimes(canvas);

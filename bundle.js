@@ -968,6 +968,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const leaderBoard = document.getElementById('leader-board-scores');
     const playername = document.getElementById("player-name");
     const score = document.getElementById('your-score');
+    const riff = document.getElementById('play-riff');
 
     playGameButton.addEventListener('mouseover', () => {
         musicOnMsg.innerHTML = "Music will play when you click this";
@@ -995,6 +996,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     playGameButton.addEventListener('click', () => {
+        riff.play();
         splashScreen.classList.add('hidden');
         volumeButton.classList.remove('hidden');
         let game = new __WEBPACK_IMPORTED_MODULE_0__public_javascripts_game__["a" /* default */](canvas);
@@ -2160,7 +2162,7 @@ class GoodTimes {
      // first I am going to crate an animate method
     animate() {
         this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height)
-        const riff = document.getElementById('play-riff').play();
+        // const riff = document.getElementById('play-riff').play();
         if ( this.gameOver ) {
             cancelAnimationFrame(this.id);
         } else {
@@ -2201,7 +2203,7 @@ class GoodTimes {
     drawScore() {
         //loc will be the location 
         const loc = {x: this.dimensions.width / 30, y: this.dimensions.height / 10}
-        this.ctx.font = "bold 20pt 'DotGothic16', sans-serif";
+        this.ctx.font = "bold 15pt 'Press Start 2P', cursive";
         this.ctx.fillStyle = "white";
         this.ctx.fillText("SCORE " + Math.trunc(this.score), loc.x, loc.y);
         this.ctx.strokeStyle = "black";
@@ -2211,46 +2213,13 @@ class GoodTimes {
 
     drawPitted() {
         const loc = {x: this.dimensions.width / 4.5, y: this.dimensions.height / 6}
-        this.ctx.font = "bold 30pt 'DotGothic16', sans-serif";
+        this.ctx.font = "bold 15pt 'Press Start 2P', cursive";
         this.ctx.fillStyle = "yellow";
         this.ctx.fillText("Gnarly!! Double Points!!", loc.x, loc.y);
         this.ctx.strokeStyle = "black";
         this.ctx.lineWidth = 1;
         this.ctx.strokeText("Gnarly!! Double Points!!", loc.x, loc.y);
 
-    }
-
-
-    drawGameOver() {
-
-        const loc = {x: this.dimensions.width / 7, y: this.dimensions.height / 4}
-        this.ctx.font = "bold 20pt 'DotGothic16', sans-serif";
-        this.ctx.fillStyle = "red";
-        this.ctx.fillText("The Game is Over your score is: " + Math.trunc(this.score), loc.x, loc.y);
-        this.ctx.strokeStyle = "black";
-        this.ctx.lineWidth = 1;
-        this.ctx.strokeText("The Game is Over your score is: " + Math.trunc(this.score), loc.x, loc.y);
-        
-        this.ctx.fillText("To play again press 'R'", loc.x, loc.y + 30);
-        this.ctx.strokeStyle = "black";
-        this.ctx.lineWidth = 1;
-        this.ctx.strokeText("To play again press 'R'", loc.x, loc.y + 30);
-
-        this.ctx.fillStyle = "blue";
-        this.ctx.fillText("Hopefully you enjoyed playing this game", loc.x, loc.y + 90);
-        this.ctx.strokeStyle = "black";
-        this.ctx.lineWidth = 1;
-        this.ctx.strokeText("Hopefully you enjoyed playing this game", loc.x, loc.y + 90);
-
-        this.ctx.fillText("as much as I did making it.", loc.x, loc.y + 120);
-        this.ctx.strokeStyle = "black";
-        this.ctx.lineWidth = 1;
-        this.ctx.strokeText("as much as I did making it.", loc.x, loc.y + 120);
-
-        this.ctx.fillText("Thank you for playing. With pleasure, Fabio.", loc.x, loc.y + 150);
-        this.ctx.strokeStyle = "black";
-        this.ctx.lineWidth = 1;
-        this.ctx.strokeText("Thank you for playing. With pleasure, Fabio.", loc.x, loc.y + 150);
     }
 
     

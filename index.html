@@ -25,7 +25,6 @@
           document.getElementById('play-riff').muted= false;
 
 
-
           element.className="fas fa-volume-up"
           element.value = "musicOff"
         } else {
@@ -83,7 +82,11 @@
 
     <article class="game-over hidden">
       <p>The Game is over!</p>
-      <p id="your-score">"YOUR SCORE IS:&nbsp;&nbsp;</p>
+      <div class= "your-score-wrap">
+        <p>Your Score is:&nbsp;</p>
+        <p id="your-score"></p>
+        <p>&nbsp;pts.</p>
+      </div>
       <input id="player-name" type="text" placeholder="Please insert your name">
       <button id="leader-board-button">Checkout the leader boad!!</button>
     </article>
