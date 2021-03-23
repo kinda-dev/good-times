@@ -952,7 +952,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     
     const canvas = document.getElementById('good-times');
-    const music = document.getElementById('good-times');
     const instructions = document.getElementsByClassName('instructions')[0];
     const volumeButton = document.getElementById('volume-button-wrap');
     const playGameButton = document.getElementById('start-game-button');
@@ -964,8 +963,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const gameOver = document.getElementsByClassName('game-over')[0];
     const restartGameButton = document.getElementById('re-start-game-button');
     const musicOnMsg = document.getElementById('music-on-msg');
-
-
+    const leaderBoardContainer = document.getElementsByClassName('leader-board-container')[0];
+    const leaderBoardButton = document.getElementById('leader-board-button');
+    const leaderBoard = document.getElementById('leader-board-scores');
 
 
     playGameButton.addEventListener('mouseover', () => {
@@ -1000,6 +1000,8 @@ document.addEventListener('DOMContentLoaded', () => {
         game.startGame();
     })
 
+
+
     restartGameButton.addEventListener('click', () => {
         splashScreen.classList.add('hidden');
         volumeButton.classList.remove('hidden');
@@ -1009,6 +1011,108 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     
+    // firestore setup
+
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDdqeG61IDJustJMg4w67P2ryGb2nPJbTs",
+        authDomain: "good-times-mini-game.firebaseapp.com",
+        projectId: "good-times-mini-game",
+        storageBucket: "good-times-mini-game.appspot.com",
+        messagingSenderId: "584091630854",
+        appId: "1:584091630854:web:76393596b9351fa3daf287",
+        measurementId: "G-Q6PK57SF02"
+      };
+    
+    const leaderBoardPlayers = document.getElementsByClassName('leader-board-players')[0];
+    
+      // Initialize Firebase
+    //   firebase.initializeApp(firebaseConfig);
+    //   firebase.analytics();
+      // maybe lines above are to comment out
+    
+    const app = firebase.initializeApp(firebaseConfig);
+    
+    const db = firebase.firestore(app);
+        firebase.firestore().settings({
+            cacheSizeBytes: firebase.firestore.CACHE_SIZE_UNLIMITED
+        });
+
+        const playername = document.getElementById("player-name");
+        const score = document.getElementById('your-score')
+        
+        leaderBoardButton.addEventListener('click', () => {
+            gameOver.classList.add('hidden');
+            leaderBoardContainer.classList.remove('hidden');
+    
+            // firebase logic below
+    
+            if( playername.value != ''){
+                db.collection('players').add({
+                    name: playername.value,
+                    score: parseInt(score.innerHTML)
+                    })
+            }
+            getLeaderBoard()    
+        })
+    
+    
+    //    const name = document.querySelector("#name");
+    //    const leaderBoard = document.querySelector("#leaderBoard");
+    //    const score = document.querySelector("#demo2");
+    
+    function renderScore(doc){
+        
+        let ul = document.createElement('ul')
+        ul.setAttribute('data-id', doc.id);
+        ul.className = "players-data-container"
+        
+        let name = document.createElement('li')
+        name.className = "firebase-player-data"
+        name.innerHTML = doc.data().name;
+        
+        let score = document.createElement('li');
+        score.className = "firebase-player-data";
+        score.innerHTML = doc.data().score + " points";
+        
+        leaderBoard.appendChild(ul);
+        ul.appendChild(name);
+        ul.appendChild(score);
+
+    }
+    
+    
+    
+    // .onSnapshot({
+        //     // Listen for document metadata changes
+        //     includeMetadataChanges: true
+        // });
+        function getLeaderBoard(){
+            
+            
+            let leaderBoard = db.collection('players').orderBy('score', "desc").limit(5)
+            leaderBoard.get().then((doc) => {
+                if (doc) {
+                    console.log(doc)
+                    doc.forEach(player => {
+                        console.log(player.data().name)
+                        renderScore(player)
+                    });
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log("No such document!");
+                }
+            })
+            .catch((error) => {
+                console.log("Error getting document:", error);
+            });
+            
+            
+        }
+            // saving data
+
+
+
 
     // before game start
     // no music button
@@ -2010,6 +2114,7 @@ class GoodTimes {
     collision() {
         if ( this.obstacles.collidesWith(this.dude.bounds()) ) {
             this.gameOver = true;
+            this.gameIsOver();
         }
         // add logic for adding scores if pickup bonuses
         if ( this.rewards.collidesWith(this.dude.bounds()) ) {
@@ -2031,19 +2136,22 @@ class GoodTimes {
         }
 
     }
+    gameIsOver() {
+        document.getElementsByClassName('game-container')[0].classList.add('hidden');
+        document.getElementsByClassName('game-over')[0].classList.remove('hidden');
+        document.getElementById('your-score').innerHTML=Math.trunc(this.score)
+    }
 
-    // first I am going to crate an animate method
+     // first I am going to crate an animate method
     animate() {
         this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height)
         // const riff = document.getElementById('play-riff').autoplay="true";
-        document.getElementsByClassName('game-over')[0].classList.add('hidden');
-        document.getElementsByClassName('game-container')[0].classList.remove('hidden');
         if ( this.gameOver ) {
-            document.getElementsByClassName('game-container')[0].classList.add('hidden');
-            document.getElementsByClassName('game-over')[0].classList.remove('hidden');
-            document.getElementById('your-score').innerHTML="YOUR SCORE IS: " + Math.trunc(this.score)
             cancelAnimationFrame(this.id);
         } else {
+        document.getElementsByClassName('leader-board-container')[0].classList.add('hidden');
+        document.getElementsByClassName('game-over')[0].classList.add('hidden');
+        document.getElementsByClassName('game-container')[0].classList.remove('hidden');
 
         this.handleScore();
         this.collision()
@@ -2065,13 +2173,13 @@ class GoodTimes {
         }
 
         this.drawScore()
-        }
+        // }
             // cancelAnimationFrame(this.id)
         
         // debugger
             // if (this.isPlaying) {
                this.id = requestAnimationFrame(this.animate.bind(this));
-            // } 
+            } 
         
     }
 

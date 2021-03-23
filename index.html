@@ -3,11 +3,15 @@
   <head>
     <meta charset="utf-8">
     <title>Good Times</title>
+    <!-- firebase-analytics firebase-app firebase-firestore scripts -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+    <script src="https://kit.fontawesome.com/e93199a89e.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="./bundle.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/e93199a89e.js" crossorigin="anonymous"></script>
     <link rel="icon" href="https://good-times-surfing-game.s3-us-west-1.amazonaws.com/favicon.svg" />
   </head>
   
@@ -77,8 +81,14 @@
 
     <article class="game-over hidden">
       <p>The Game is over!</p>
-      <p id="your-score"></p>
+      <p id="your-score">"YOUR SCORE IS:&nbsp;&nbsp;</p>
       <input id="player-name" type="text" placeholder="Please insert your name">
+      <button id="leader-board-button">Checkout the leader boad!!</button>
+    </article>
+
+    <article class="leader-board-container hidden">
+      <p id="leader-board">Hall of Fame</p>
+      <div id="leader-board-scores"></div>
       <button id="re-start-game-button">Restart Game</button>
 
     </article>
