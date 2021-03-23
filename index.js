@@ -97,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const score = document.getElementById('your-score')
         
         leaderBoardButton.addEventListener('click', () => {
+            leaderBoard.innerHTML = '';
             gameOver.classList.add('hidden');
             leaderBoardContainer.classList.remove('hidden');
     
@@ -108,6 +109,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     score: parseInt(score.innerHTML)
                     })
             }
+
+
             getLeaderBoard()    
         })
     
@@ -133,7 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
         leaderBoard.appendChild(ul);
         ul.appendChild(name);
         ul.appendChild(score);
-
     }
     
     
@@ -143,7 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
         //     includeMetadataChanges: true
         // });
         function getLeaderBoard(){
-            
             
             let leaderBoard = db.collection('players').orderBy('score', "desc").limit(5)
             leaderBoard.get().then((doc) => {
