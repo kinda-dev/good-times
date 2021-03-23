@@ -965,6 +965,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const musicOnMsg = document.getElementById('music-on-msg');
     const leaderBoardContainer = document.getElementsByClassName('leader-board-container')[0];
     const leaderBoardButton = document.getElementById('leader-board-button');
+    const leaderBoard = document.getElementById('leader-board-scores');
 
 
     playGameButton.addEventListener('mouseover', () => {
@@ -1039,7 +1040,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const playername = document.getElementById("player-name");
         const score = document.getElementById('your-score')
-    
+        
         leaderBoardButton.addEventListener('click', () => {
             gameOver.classList.add('hidden');
             leaderBoardContainer.classList.remove('hidden');
@@ -1050,9 +1051,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 db.collection('players').add({
                     name: playername.value,
                     score: parseInt(score.innerHTML)
-                    });
-                  }
-    
+                    })
+            }
+            getLeaderBoard()    
         })
     
     
@@ -1060,41 +1061,55 @@ document.addEventListener('DOMContentLoaded', () => {
     //    const leaderBoard = document.querySelector("#leaderBoard");
     //    const score = document.querySelector("#demo2");
     
-    function renderPlayer(doc){
-        let tr = document.createElement('tr');
-        let name = document.createElement('span');
-        let score = document.createElement('td');
-    
-        tr.setAttribute('data-id', doc.id);
-        name.textContent = doc.data().name;
-        score.textContent = doc.data().score;
-    
-        tr.appendChild(name);
-        tr.appendChild(score);
-    
-        leaderBoard.appendChild(tr);
+    function renderScore(doc){
+        
+        let ul = document.createElement('ul')
+        ul.setAttribute('data-id', doc.id);
+        ul.className = "players-data-container"
+        
+        let name = document.createElement('li')
+        name.className = "firebase-player-data"
+        name.innerHTML = doc.data().name;
+        
+        let score = document.createElement('li');
+        score.className = "firebase-player-data";
+        score.innerHTML = doc.data().score + " points";
+        
+        leaderBoard.appendChild(ul);
+        ul.appendChild(name);
+        ul.appendChild(score);
+
     }
     
     
     
-    let leaderBoard = db.collection('players').orderBy('score', "desc").limit(5);
-    
-    leaderBoard.get().then((doc) => {
-        if (doc) {
-            doc.forEach(player => {
-                console.log(player.data())
-                console.log(player.data().name)
+    // .onSnapshot({
+        //     // Listen for document metadata changes
+        //     includeMetadataChanges: true
+        // });
+        function getLeaderBoard(){
+            
+            
+            let leaderBoard = db.collection('players').orderBy('score', "desc").limit(5)
+            leaderBoard.get().then((doc) => {
+                if (doc) {
+                    console.log(doc)
+                    doc.forEach(player => {
+                        console.log(player.data().name)
+                        renderScore(player)
+                    });
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log("No such document!");
+                }
+            })
+            .catch((error) => {
+                console.log("Error getting document:", error);
             });
-        } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
+            
+            
         }
-        })
-        .catch((error) => {
-            console.log("Error getting document:", error);
-    });
-    
-    // saving data
+            // saving data
 
 
 
