@@ -98,7 +98,7 @@ export default class GoodTimes {
      // first I am going to crate an animate method
     animate() {
         this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height)
-        // const riff = document.getElementById('play-riff').autoplay="true";
+        document.getElementById('play-riff').autoplay="true";
         if ( this.gameOver ) {
             cancelAnimationFrame(this.id);
         } else {
