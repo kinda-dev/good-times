@@ -277,17 +277,56 @@ p {
   text-align: center;
 }
 
+#music-on-msg {
+  margin: 10px;
+}
+
 /* buttons shake */
-button {
+#start-game-button {
   position: relative;
   animation-name: shake;
   animation-duration: 3s;
   animation-iteration-count: infinite;
   animation-timing-function: ease-in;
 }
-
-button:hover {
+#start-game-button:hover {
   animation-name: shakeAnim;
+}
+
+#show-instructions-button {
+  position: relative;
+  animation-name: shake;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in;
+}
+#show-instructions-button:hover {
+  animation-name: shakeAnim;
+}
+
+#re-start-game-button {
+  position: relative;
+  animation-name: shake;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in;
+}
+#re-start-game-button:hover {
+  animation-name: shakeAnim;
+}
+
+#player-name {
+  margin: 10px;
+  padding: 10px;
+  background: transparent;
+  color: white;
+  border: 3px solid white;
+  border-radius: 12px;
+}
+
+::placeholder {
+  color: white;
+  opacity: 1;
 }
 
 @keyframes shakeAnim {

@@ -963,11 +963,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const gameContainer = document.getElementsByClassName('game-container')[0];
     const gameOver = document.getElementsByClassName('game-over')[0];
     const restartGameButton = document.getElementById('re-start-game-button');
+    const musicOnMsg = document.getElementById('music-on-msg');
 
 
 
 
-    
+    playGameButton.addEventListener('mouseover', () => {
+        musicOnMsg.innerHTML = "Music will play when you click this";
+
+    })
+
+    playGameButton.addEventListener('mouseout', () => {
+        musicOnMsg.innerHTML = "";
+
+    })
+
     instructionsButton.addEventListener('click', () => {
         gameOver.classList.add('hidden');
         splashText.classList.add('hidden');
