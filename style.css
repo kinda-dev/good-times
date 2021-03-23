@@ -277,6 +277,17 @@ p {
   text-align: center;
 }
 
+.leader-board-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 20vh;
+  left: 20vw;
+  width: 60vw;
+  align-items: center;
+  text-align: center;
+}
+
 #music-on-msg {
   margin: 10px;
 }

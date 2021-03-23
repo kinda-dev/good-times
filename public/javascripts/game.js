@@ -67,6 +67,7 @@ export default class GoodTimes {
     collision() {
         if ( this.obstacles.collidesWith(this.dude.bounds()) ) {
             this.gameOver = true;
+            this.gameIsOver();
         }
         // add logic for adding scores if pickup bonuses
         if ( this.rewards.collidesWith(this.dude.bounds()) ) {
@@ -88,19 +89,29 @@ export default class GoodTimes {
         }
 
     }
+    gameIsOver() {
+        console.log('first')
+        document.getElementsByClassName('game-container')[0].classList.add('hidden');
+        document.getElementsByClassName('game-over')[0].classList.remove('hidden');
+        document.getElementById('your-score').innerHTML="YOUR SCORE IS: " + Math.trunc(this.score)
+        console.log('second')
+    }
 
-    // first I am going to crate an animate method
+     // first I am going to crate an animate method
     animate() {
         this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height)
         // const riff = document.getElementById('play-riff').autoplay="true";
+        if ( this.gameOver ) {
+            console.log('first')
+            cancelAnimationFrame(this.id);
+            // document.getElementsByClassName('game-container')[0].classList.add('hidden');
+            // document.getElementsByClassName('game-over')[0].classList.remove('hidden');
+            // document.getElementById('your-score').innerHTML="YOUR SCORE IS: " + Math.trunc(this.score)
+            console.log('second')
+        } else {
+        document.getElementsByClassName('leader-board-container')[0].classList.add('hidden');
         document.getElementsByClassName('game-over')[0].classList.add('hidden');
         document.getElementsByClassName('game-container')[0].classList.remove('hidden');
-        if ( this.gameOver ) {
-            document.getElementsByClassName('game-container')[0].classList.add('hidden');
-            document.getElementsByClassName('game-over')[0].classList.remove('hidden');
-            document.getElementById('your-score').innerHTML="YOUR SCORE IS: " + Math.trunc(this.score)
-            cancelAnimationFrame(this.id);
-        } else {
 
         this.handleScore();
         this.collision()
@@ -122,13 +133,13 @@ export default class GoodTimes {
         }
 
         this.drawScore()
-        }
+        // }
             // cancelAnimationFrame(this.id)
         
         // debugger
             // if (this.isPlaying) {
                this.id = requestAnimationFrame(this.animate.bind(this));
-            // } 
+            } 
         
     }
 

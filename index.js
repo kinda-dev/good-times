@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     
     const canvas = document.getElementById('good-times');
-    const music = document.getElementById('good-times');
     const instructions = document.getElementsByClassName('instructions')[0];
     const volumeButton = document.getElementById('volume-button-wrap');
     const playGameButton = document.getElementById('start-game-button');
@@ -19,6 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const gameOver = document.getElementsByClassName('game-over')[0];
     const restartGameButton = document.getElementById('re-start-game-button');
     const musicOnMsg = document.getElementById('music-on-msg');
+    const leaderBoardContainer = document.getElementsByClassName('leader-board-container')[0];
+    const leaderBoardButton = document.getElementById('leader-board-button');
+
+
 
 
 
@@ -53,6 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
         volumeButton.classList.remove('hidden');
         let game = new GoodTimes(canvas);
         game.startGame();
+    })
+
+    leaderBoardButton.addEventListener('click', () => {
+        gameOver.classList.add('hidden');
+        leaderBoardContainer.classList.remove('hidden');
     })
 
     restartGameButton.addEventListener('click', () => {

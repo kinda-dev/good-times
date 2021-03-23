@@ -952,7 +952,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     
     const canvas = document.getElementById('good-times');
-    const music = document.getElementById('good-times');
     const instructions = document.getElementsByClassName('instructions')[0];
     const volumeButton = document.getElementById('volume-button-wrap');
     const playGameButton = document.getElementById('start-game-button');
@@ -964,6 +963,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const gameOver = document.getElementsByClassName('game-over')[0];
     const restartGameButton = document.getElementById('re-start-game-button');
     const musicOnMsg = document.getElementById('music-on-msg');
+    const leaderBoardContainer = document.getElementsByClassName('leader-board-container')[0];
+    const leaderBoardButton = document.getElementById('leader-board-button');
+
+
 
 
 
@@ -998,6 +1001,11 @@ document.addEventListener('DOMContentLoaded', () => {
         volumeButton.classList.remove('hidden');
         let game = new __WEBPACK_IMPORTED_MODULE_0__public_javascripts_game__["a" /* default */](canvas);
         game.startGame();
+    })
+
+    leaderBoardButton.addEventListener('click', () => {
+        gameOver.classList.add('hidden');
+        leaderBoardContainer.classList.remove('hidden');
     })
 
     restartGameButton.addEventListener('click', () => {
@@ -2010,6 +2018,7 @@ class GoodTimes {
     collision() {
         if ( this.obstacles.collidesWith(this.dude.bounds()) ) {
             this.gameOver = true;
+            this.gameIsOver();
         }
         // add logic for adding scores if pickup bonuses
         if ( this.rewards.collidesWith(this.dude.bounds()) ) {
@@ -2031,19 +2040,29 @@ class GoodTimes {
         }
 
     }
+    gameIsOver() {
+        console.log('first')
+        document.getElementsByClassName('game-container')[0].classList.add('hidden');
+        document.getElementsByClassName('game-over')[0].classList.remove('hidden');
+        document.getElementById('your-score').innerHTML="YOUR SCORE IS: " + Math.trunc(this.score)
+        console.log('second')
+    }
 
-    // first I am going to crate an animate method
+     // first I am going to crate an animate method
     animate() {
         this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height)
         // const riff = document.getElementById('play-riff').autoplay="true";
+        if ( this.gameOver ) {
+            console.log('first')
+            cancelAnimationFrame(this.id);
+            // document.getElementsByClassName('game-container')[0].classList.add('hidden');
+            // document.getElementsByClassName('game-over')[0].classList.remove('hidden');
+            // document.getElementById('your-score').innerHTML="YOUR SCORE IS: " + Math.trunc(this.score)
+            console.log('second')
+        } else {
+        document.getElementsByClassName('leader-board-container')[0].classList.add('hidden');
         document.getElementsByClassName('game-over')[0].classList.add('hidden');
         document.getElementsByClassName('game-container')[0].classList.remove('hidden');
-        if ( this.gameOver ) {
-            document.getElementsByClassName('game-container')[0].classList.add('hidden');
-            document.getElementsByClassName('game-over')[0].classList.remove('hidden');
-            document.getElementById('your-score').innerHTML="YOUR SCORE IS: " + Math.trunc(this.score)
-            cancelAnimationFrame(this.id);
-        } else {
 
         this.handleScore();
         this.collision()
@@ -2065,13 +2084,13 @@ class GoodTimes {
         }
 
         this.drawScore()
-        }
+        // }
             // cancelAnimationFrame(this.id)
         
         // debugger
             // if (this.isPlaying) {
                this.id = requestAnimationFrame(this.animate.bind(this));
-            // } 
+            } 
         
     }
 
