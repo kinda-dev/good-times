@@ -90,11 +90,9 @@ export default class GoodTimes {
 
     }
     gameIsOver() {
-        console.log('first')
         document.getElementsByClassName('game-container')[0].classList.add('hidden');
         document.getElementsByClassName('game-over')[0].classList.remove('hidden');
-        document.getElementById('your-score').innerHTML="YOUR SCORE IS: " + Math.trunc(this.score)
-        console.log('second')
+        document.getElementById('your-score').innerHTML=Math.trunc(this.score)
     }
 
      // first I am going to crate an animate method
@@ -102,12 +100,7 @@ export default class GoodTimes {
         this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height)
         // const riff = document.getElementById('play-riff').autoplay="true";
         if ( this.gameOver ) {
-            console.log('first')
             cancelAnimationFrame(this.id);
-            // document.getElementsByClassName('game-container')[0].classList.add('hidden');
-            // document.getElementsByClassName('game-over')[0].classList.remove('hidden');
-            // document.getElementById('your-score').innerHTML="YOUR SCORE IS: " + Math.trunc(this.score)
-            console.log('second')
         } else {
         document.getElementsByClassName('leader-board-container')[0].classList.add('hidden');
         document.getElementsByClassName('game-over')[0].classList.add('hidden');

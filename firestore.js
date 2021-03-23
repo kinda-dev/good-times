@@ -10,7 +10,12 @@ const firebaseConfig = {
 
 const leaderBoardButton = document.getElementById('leader-board-button');
 const playername = document.getElementById("player-name");
-const leaderBoardPlayers = document.getElementById('leader-board-players');
+const leaderBoardPlayers = document.getElementsByClassName('leader-board-players')[0];
+const score = document.getElementById('your-score')
+console.log(leaderBoardButton)
+console.log(leaderBoardPlayers)
+console.log(playername)
+console.log(document)
 
 
   // Initialize Firebase
@@ -19,6 +24,7 @@ const leaderBoardPlayers = document.getElementById('leader-board-players');
   // maybe lines above are to comment out
 
 const app = firebase.initializeApp(firebaseConfig);
+
 const db = firebase.firestore(app);
     firebase.firestore().settings({
         cacheSizeBytes: firebase.firestore.CACHE_SIZE_UNLIMITED
@@ -64,11 +70,11 @@ leaderBoard.get().then((doc) => {
 });
 
 // saving data
-submitPlayers.addEventListener("click",function(){
+leaderBoardButton.addEventListener("click",function(){
     if( playername.value != ''){
-    db.collection('players').add({
+    db.collection('players').set({
         name: playername.value,
-        score: parseInt(score.value)
+        score: score.innerHTML
         });
       }
     });
