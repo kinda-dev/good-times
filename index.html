@@ -39,7 +39,7 @@
       }
     </script>
 
-    <audio id="play-riff" loop autoplay="true" preload="auto" muted="false">
+    <audio id="play-riff" loop autoplay="false" preload="auto" muted="true">
       <source src="https://good-times-surfing-game.s3-us-west-1.amazonaws.com/play-riff.mp3"> 
    </audio>
 
@@ -49,8 +49,8 @@
         <div id="volume-button-wrap" class="hidden"><i onclick=toggleMusic(this)  value="musicOn" class="fas fa-volume-up"></i></div>
       </div>
       <div class="navbar-right-wrap">
-        <a class="email-button" href="mailto:maybe.fabio@gmail.com" target="_blank">@</a>
-
+        <a class="email-button-wrap" href="mailto:maybe.fabio@gmail.com" target="_blank"><i class="fas fa-at"></i></a>
+        <a class="linkedin-button-wrap" href="https://www.linkedin.com/in/fabio-raffaele-bortone" target="_blank"><i class="fab fa-linkedin"></i></a>
         <a class="github-button-wrap" href="https://github.com/kinda-dev" target="_blank"><i class="fab fa-github"></i></a>
       </div>
     </navbar>
@@ -62,8 +62,8 @@
     <div class="splash-screen">
       <article class="splash-text">
         <p>Welcome to Maverik, California.</p>
-        <p>A big swell is pumping and the sun is warm</p>
-        <p>how long can you surf a perfect wave while having a</p>
+        <p>A big swell is pumping and the sun is warm.</p> 
+        <p>How long can you surf a perfect wave while having a</p>
         <p>Good Time?</p>
       </article>
       <article class="instructions hidden">
@@ -83,12 +83,13 @@
     <article class="game-over hidden">
       <p>The Game is over!</p>
       <div class= "your-score-wrap">
-        <p>Your Score is:&nbsp;</p>
+        <p>Your Score is:</p>
         <p id="your-score"></p>
-        <p>&nbsp;pts.</p>
+        <p>pts.</p>
       </div>
+      <p class="thank-you">Thank you for playing!</p>
       <input id="player-name" type="text" placeholder="Please insert your name">
-      <button id="leader-board-button">Checkout the leader boad!!</button>
+      <button id="leader-board-button">Leader boad</button>
     </article>
 
     <article class="leader-board-container hidden">

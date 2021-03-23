@@ -147,7 +147,7 @@ button:focus {
 }
 
 button {
-  padding: 5px;
+  padding: 10px;
   margin: 5px;
   border: 3px solid yellow;
   border-radius: 12px;
@@ -156,21 +156,22 @@ button {
   min-height: 40px;
   cursor: pointer;
   color: white;
-  font-family: "DotGothic16", sans-serif;
+  font-family: "Press Start 2P", cursive;
+
   font-weight: 600;
-  font-size: xx-large;
+  font-size: x-large;
   -webkit-text-stroke: 1px black;
 }
 
 p {
-  margin: 10px;
+  margin: 30px;
   font-size: 4vh;
-  font-weight: 600;
+  font-weight: 400;
   -webkit-text-stroke: 1px black;
 }
 
 .splash-buttons-wrap {
-  margin-top: 15vh;
+  margin-top: 5vh;
 }
 
 #good-times {
@@ -252,23 +253,22 @@ p {
   display: flex;
   flex-direction: row;
   align-items: center;
+  min-width: 5vw;
+  justify-content: space-between;
 }
 
-.github-button-wrap {
+.fab {
   color: white;
-  /* -webkit-text-stroke: 1px black; */
-  cursor: pointer;
   font-size: x-large;
-  margin-left: 30px;
 }
 
-.email-button {
-  text-decoration: none;
-  font-family: "Font Awesome 5 Pro";
+.fa-at {
   color: white;
-  font-size: 30px;
-  font-weight: bolder;
-  padding-bottom: 6px;
+  font-size: x-large;
+}
+
+#music-on-msg {
+  color: yellow;
 }
 
 .splash-screen {

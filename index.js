@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const riff = document.getElementById('play-riff');
 
     playGameButton.addEventListener('mouseover', () => {
-        musicOnMsg.innerHTML = "Music will play when you click this";
+        musicOnMsg.innerHTML = "Music will play when the game starts";
 
     })
 
@@ -51,16 +51,17 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     playGameButton.addEventListener('click', () => {
-        riff.play();
         splashScreen.classList.add('hidden');
         volumeButton.classList.remove('hidden');
         let game = new GoodTimes(canvas);
+        riff.muted= false
         game.startGame();
     })
 
 
 
     restartGameButton.addEventListener('click', () => {
+        console.log('hit')
         splashScreen.classList.add('hidden');
         volumeButton.classList.remove('hidden');
         let game = new GoodTimes(canvas);
@@ -128,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             score: parseInt(score.innerHTML)
                             })
                     }
-                    getLeaderBoard()    
+            getLeaderBoard()    
         }
     })
     

@@ -20,7 +20,7 @@ export default class GoodTimes {
     startGame() {
         this.score = 0;
         this.gameOver = false;
-        const element = document.getElementById('play-riff').muted= false;
+        const element = document.getElementById('play-riff').play();
 
         this.background = new Background(this.dimensions);
         // create instance of dude after the backround so it doesn't get covered
@@ -98,7 +98,6 @@ export default class GoodTimes {
      // first I am going to crate an animate method
     animate() {
         this.ctx.clearRect(0, 0, this.dimensions.width, this.dimensions.height)
-        // const riff = document.getElementById('play-riff').play();
         if ( this.gameOver ) {
             cancelAnimationFrame(this.id);
         } else {
