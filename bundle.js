@@ -966,7 +966,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const leaderBoardContainer = document.getElementsByClassName('leader-board-container')[0];
     const leaderBoardButton = document.getElementById('leader-board-button');
     const leaderBoard = document.getElementById('leader-board-scores');
-
+    const playername = document.getElementById("player-name");
+    const score = document.getElementById('your-score');
 
     playGameButton.addEventListener('mouseover', () => {
         musicOnMsg.innerHTML = "Music will play when you click this";
@@ -1038,26 +1039,41 @@ document.addEventListener('DOMContentLoaded', () => {
             cacheSizeBytes: firebase.firestore.CACHE_SIZE_UNLIMITED
         });
 
-        const playername = document.getElementById("player-name");
-        const score = document.getElementById('your-score')
         
-        leaderBoardButton.addEventListener('click', () => {
+    leaderBoardButton.addEventListener('click', (e) => {
+        e.preventDefault()
+        leaderBoard.innerHTML = '';
+        gameOver.classList.add('hidden');
+        leaderBoardContainer.classList.remove('hidden');
+
+        // firebase logic below
+
+        if( playername.value != ''){
+            db.collection('players').add({
+                name: playername.value,
+                score: parseInt(score.innerHTML)
+                })
+        }
+        getLeaderBoard()    
+    })
+
+    playername.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
             leaderBoard.innerHTML = '';
             gameOver.classList.add('hidden');
             leaderBoardContainer.classList.remove('hidden');
-    
+            
             // firebase logic below
-    
+            
             if( playername.value != ''){
-                db.collection('players').add({
-                    name: playername.value,
-                    score: parseInt(score.innerHTML)
-                    })
-            }
-
-
-            getLeaderBoard()    
-        })
+                    db.collection('players').add({
+                            name: playername.value,
+                            score: parseInt(score.innerHTML)
+                            })
+                    }
+                    getLeaderBoard()    
+        }
+    })
     
     
     //    const name = document.querySelector("#name");
@@ -1094,9 +1110,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let leaderBoard = db.collection('players').orderBy('score', "desc").limit(5)
             leaderBoard.get().then((doc) => {
                 if (doc) {
-                    console.log(doc)
                     doc.forEach(player => {
-                        console.log(player.data().name)
                         renderScore(player)
                     });
                 } else {
