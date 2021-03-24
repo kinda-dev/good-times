@@ -170,6 +170,20 @@ p {
   -webkit-text-stroke: 1px black;
 }
 
+.container {
+  width: 80vw;
+  height: 80vh;
+  border: 3px dotted white;
+  position: absolute;
+  left: 10%;
+  bottom: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
 .splash-buttons-wrap {
   margin-top: 5vh;
 }
@@ -178,13 +192,13 @@ p {
   width: 80vw;
   height: 80vh;
   border: 3px dotted white;
-  background: rgb(56, 56, 165);
-  /* object-fit: contain; */
-  background-image: url("https://good-times-surfing-game.s3-us-west-1.amazonaws.com/start_bckgrd.png");
   position: absolute;
   /* top: 50%; */
   left: 10%;
   bottom: 5%;
+  background: rgb(56, 56, 165);
+  /* object-fit: contain; */
+  background-image: url("https://good-times-surfing-game.s3-us-west-1.amazonaws.com/start_bckgrd.png");
   /* transform: translate(-50%, -50%); */
 }
 
@@ -269,9 +283,22 @@ p {
 
 #music-on-msg {
   color: yellow;
+  position: absolute;
+  /* z-index: 100; */
 }
 
-.splash-screen {
+/* .splash-screen {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  align-items: center;
+  text-align: center;
+  top: 20vh;
+  left: 20vw;
+  width: 60vw;
+} */
+
+/* .game-over {
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -280,18 +307,7 @@ p {
   width: 60vw;
   align-items: center;
   text-align: center;
-}
-
-.game-over {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 20vh;
-  left: 20vw;
-  width: 60vw;
-  align-items: center;
-  text-align: center;
-}
+} */
 
 .your-score-wrap {
   display: flex;
@@ -302,7 +318,7 @@ p {
   color: yellow;
 }
 
-.leader-board-container {
+/* .leader-board-container {
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -311,7 +327,7 @@ p {
   width: 60vw;
   align-items: center;
   text-align: center;
-}
+} */
 
 #leader-board-scores {
   display: flex;
@@ -389,11 +405,20 @@ p {
   color: white;
   border: 3px solid white;
   border-radius: 12px;
+  font-size: large;
+  font-weight: 600;
+  text-align: center;
 }
 
 ::placeholder {
-  color: white;
+  /* background-color: blue; */
+  color: yellow;
   opacity: 1;
+  text-align: center;
+  /* padding: 10px;
+  border-radius: 12px;
+  width: 100%; */
+  /* margin-left: -10px; */
 }
 
 @keyframes shakeAnim {

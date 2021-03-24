@@ -1,7 +1,7 @@
 const axios = require('axios');
 import GoodTimes from './public/javascripts/game';
 
-let canvas = '';
+
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -24,6 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const playername = document.getElementById("player-name");
     const score = document.getElementById('your-score');
     const riff = document.getElementById('play-riff');
+    const lowerScore = document.getElementById('lower-score');
+
 
     playGameButton.addEventListener('mouseover', () => {
         musicOnMsg.innerHTML = "Music will play when the game starts";
@@ -51,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     playGameButton.addEventListener('click', () => {
+        getLeaderBoard()    
         splashScreen.classList.add('hidden');
         volumeButton.classList.remove('hidden');
         let game = new GoodTimes(canvas);
@@ -61,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     restartGameButton.addEventListener('click', () => {
-        console.log('hit')
         splashScreen.classList.add('hidden');
         volumeButton.classList.remove('hidden');
         let game = new GoodTimes(canvas);
@@ -83,13 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
         measurementId: "G-Q6PK57SF02"
       };
     
-    const leaderBoardPlayers = document.getElementsByClassName('leader-board-players')[0];
     
-      // Initialize Firebase
-    //   firebase.initializeApp(firebaseConfig);
-    //   firebase.analytics();
-      // maybe lines above are to comment out
-    
+
     const app = firebase.initializeApp(firebaseConfig);
     
     const db = firebase.firestore(app);
@@ -100,43 +97,37 @@ document.addEventListener('DOMContentLoaded', () => {
         
     leaderBoardButton.addEventListener('click', (e) => {
         e.preventDefault()
-        leaderBoard.innerHTML = '';
         gameOver.classList.add('hidden');
         leaderBoardContainer.classList.remove('hidden');
 
-        // firebase logic below
 
-        if( playername.value != ''){
+        if( playername.value != '' && parseInt(score.innerHTML) > parseInt(lowerScore.innerHTML)){
+            console.log('added')
             db.collection('players').add({
                 name: playername.value,
                 score: parseInt(score.innerHTML)
-                })
+            })
+            getLeaderBoard()    
         }
-        getLeaderBoard()    
     })
 
     playername.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
-            leaderBoard.innerHTML = '';
             gameOver.classList.add('hidden');
             leaderBoardContainer.classList.remove('hidden');
             
-            // firebase logic below
             
-            if( playername.value != ''){
-                    db.collection('players').add({
-                            name: playername.value,
-                            score: parseInt(score.innerHTML)
-                            })
-                    }
-            getLeaderBoard()    
+            if( playername.value != '' && parseInt(score.innerHTML) > parseInt(lowerScore.innerHTML)){
+                console.log('added')
+                db.collection('players').add({
+                    name: playername.value,
+                    score: parseInt(score.innerHTML)
+                })
+                getLeaderBoard()    
+            }
         }
     })
     
-    
-    //    const name = document.querySelector("#name");
-    //    const leaderBoard = document.querySelector("#leaderBoard");
-    //    const score = document.querySelector("#demo2");
     
     function renderScore(doc, idx){
         let ul = document.createElement('ul')
@@ -162,67 +153,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     
-    
-    // .onSnapshot({
-        //     // Listen for document metadata changes
-        //     includeMetadataChanges: true
-        // });
-        function getLeaderBoard(){
-            
-            let leaderBoard = db.collection('players').orderBy('score', "desc").limit(5)
-            leaderBoard.get().then((doc) => {
+    function getLeaderBoard(){
+
+        if (parseInt(score.innerHTML) > parseInt(lowerScore.innerHTML)) {
+            leaderBoard.innerHTML = '';
+            let scoreBoard = db.collection('players').orderBy('score', "desc").limit(5)
+            scoreBoard.get().then((doc) => {
+                console.log('hit database')
+                console.log(doc)
                 if (doc) {
                     let idx = 0
                     doc.forEach((player) => {
-                        idx ++
-                        debugger
-                        renderScore(player, idx)
+                        idx ++;
+                        renderScore(player, idx);
+                        lowerScore.innerHTML = player.data().score;
                     });
                 } else {
-                    // doc.data() will be undefined in this case
                     console.log("No such document!");
                 }
             })
             .catch((error) => {
                 console.log("Error getting document:", error);
             });
-            
-            
-        }
-            // saving data
+        } 
+        
+    }
 
-
-
-
-    // before game start
-    // no music button
-    // navbar
-    // splash
-    // instructions button
-    // play game button
-
-    // when looking at instructions
-    // hide splah-text
-    // display hide instructions button
-    // display play game button
-
-    // when click game start
-    // hide play game button
-    // hide splash
-    // hide instructions
-    // reset canvas
-    // show music button
-    // show canvas
-    // create game instance
-
-    // when game stops
-    // hide canvas
-    // reset canvas
-    // show game over message
-    // show scoreboard
-    // show start a new game button
-
-    // when click start new game
-    // show splash
 
 })

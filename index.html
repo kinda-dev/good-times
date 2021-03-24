@@ -55,11 +55,7 @@
       </div>
     </navbar>
 
-    <ul class="start-menu no-show">
-      <li ></li>
-    </ul>
-
-    <div class="splash-screen">
+    <div class="splash-screen container">
       <article class="splash-text">
         <p>Welcome to Maverik, California.</p>
         <p>A big swell is pumping and the sun is warm.</p> 
@@ -79,25 +75,26 @@
       </div>
     </div>
 
+    <div id="lower-score" style="display: none;">0</div>
 
-    <article class="game-over hidden">
+    <div class="game-over hidden container">
       <p>The Game is over!</p>
       <div class= "your-score-wrap">
         <p>Your Score is:</p>
-        <p id="your-score"></p>
+        <p id="your-score">1</p>
         <p>pts.</p>
       </div>
       <p class="thank-you">Thank you for playing!</p>
       <input id="player-name" type="text" placeholder="Please insert your name">
       <button id="leader-board-button">Leader boad</button>
-    </article>
+    </div>
 
-    <article class="leader-board-container hidden">
+    <div class="leader-board-container hidden container">
       <p id="leader-board">Hall of Fame</p>
       <div id="leader-board-scores"></div>
       <button id="re-start-game-button">Restart Game</button>
 
-    </article>
+    </div>
 
 
     <div class="game-container hidden">
