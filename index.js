@@ -138,21 +138,25 @@ document.addEventListener('DOMContentLoaded', () => {
     //    const leaderBoard = document.querySelector("#leaderBoard");
     //    const score = document.querySelector("#demo2");
     
-    function renderScore(doc){
-        
+    function renderScore(doc, idx){
         let ul = document.createElement('ul')
         ul.setAttribute('data-id', doc.id);
         ul.className = "players-data-container"
-        
+
+        let index = document.createElement('li');
+        index.className = "firebase-player-score";
+        index.innerHTML = idx + ".";
+
         let name = document.createElement('li')
-        name.className = "firebase-player-data"
+        name.className = "firebase-player-name"
         name.innerHTML = doc.data().name;
         
         let score = document.createElement('li');
-        score.className = "firebase-player-data";
-        score.innerHTML = doc.data().score + " points";
+        score.className = "firebase-player-score";
+        score.innerHTML = doc.data().score + " pts.";
         
         leaderBoard.appendChild(ul);
+        ul.appendChild(index);
         ul.appendChild(name);
         ul.appendChild(score);
     }
@@ -168,8 +172,11 @@ document.addEventListener('DOMContentLoaded', () => {
             let leaderBoard = db.collection('players').orderBy('score', "desc").limit(5)
             leaderBoard.get().then((doc) => {
                 if (doc) {
-                    doc.forEach(player => {
-                        renderScore(player)
+                    let idx = 0
+                    doc.forEach((player) => {
+                        idx ++
+                        debugger
+                        renderScore(player, idx)
                     });
                 } else {
                     // doc.data() will be undefined in this case
