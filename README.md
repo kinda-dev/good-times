@@ -17,3 +17,5 @@ HTML5, JS, CSS Node Version: 10.13.0, Webpack, Google Firebase database, Aws.
 - Integrated Google Firebase in order to persist user scores and implemented caching so that scores only get updated when a user is in the top 5, saving many round trips to the database.
 - Utilized JavaScript event listeners, CSS percentages and CSS Translate and Transform resulting in an interface that is fast, consistent across browsers, adaptive and responsive.
 - Used JavaScript's requestAnimationFrame method to create an animation loop allowing objects in the game to be rerendered to create a great user experience.
+
+---
